@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProStores - High Quality Mobile Applications</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 0 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .app-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .app-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 25px;
+            margin: 0 auto 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        .app-card:hover .app-icon {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        }
+
+        .app-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .app-description {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .app-features {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .app-features h4 {
+            color: #3498db;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .app-features ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .app-features li {
+            padding: 5px 0;
+            color: #555;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .app-features li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .app-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .app-link {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .app-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+        }
+
+        .app-link.details {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .app-link.details:hover {
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+        }
+
+        .footer {
+            background: rgba(44, 62, 80, 0.9);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 60px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ecf0f1;
+        }
+
+        .contact-item a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            color: #5dade2;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .apps-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .app-card {
+                padding: 30px 20px;
+            }
+
+            .app-icon {
+                width: 100px;
+                height: 100px;
+            }
+
+            .app-title {
+                font-size: 1.5rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1>🚀 ProStores</h1>
+            <p>Collection of high-quality mobile applications, developed by Superman 🦸‍♂️</p>
+        </header>
+
+        <!-- Apps Grid -->
+        <section class="apps-grid">
+            <!-- IPA English Mastery App -->
+            <div class="app-card">
+                <img src="ipa/ic_launcher.png" alt="IPA English Mastery Icon" class="app-icon">
+                <h2 class="app-title">IPA English Mastery</h2>
+                <p class="app-description">
+                    English pronunciation learning app through the International Phonetic Alphabet (IPA). 
+                    Help you improve your pronunciation accuracy and effectively.
+                </p>
+                
+                <div class="app-features">
+                    <h4>🎯 Key Features:</h4>
+                    <ul>
+                        <li>Complete IPA chart with audio</li>
+                        <li>Detailed pronunciation guide</li>
+                        <li>Word and sentence practice exercises</li>
+                        <li>Interactive quizzes to test knowledge</li>
+                        <li>100% free</li>
+                    </ul>
+                </div>
+
+                <div class="app-links">
+                    <a href="ipa/index.html" class="app-link details">📖 Details</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.tls.english" class="app-link" target="_blank">📱 Google Play</a>
+                    <a href="https://bit.ly/4lu98Lq" class="app-link" target="_blank">🍎 App Store</a>
+                </div>
+            </div>
+
+            <!-- Call Filter Pro App -->
+            <div class="app-card">
+                <img src="phonecontrol/ic_launcher.png" alt="Call Filter Pro Icon" class="app-icon">
+                <h2 class="app-title">Call Filter Pro</h2>
+                <p class="app-description">
+                    Smart call management app that helps you take complete control of incoming calls. 
+                    Block spam, manage contacts and optimize your communication experience.
+                </p>
+                
+                <div class="app-features">
+                    <h4>🛡️ Key Features:</h4>
+                    <ul>
+                        <li>Automatic spam call blocking</li>
+                        <li>Blacklist/whitelist management</li>
+                        <li>Detailed call reports</li>
+                        <li>High security and privacy</li>
+                        <li>Modern interface</li>
+                    </ul>
+                </div>
+
+                <div class="app-links">
+                    <a href="phonecontrol/index.html" class="app-link details">📖 Details</a>
+                    <a href="#" class="app-link">📥 Download APK</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <h3>📞 Contact & Support</h3>
+            <p>We're always ready to help and listen to user feedback</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <span>Email: <a href="mailto:setephentera@gmail.com">setephentera@gmail.com</a></span>
+                </div>
+                <div class="contact-item">
+                    <span>👨‍💻</span>
+                    <span>Developer: Superman 🦸‍♂️</span>
+                </div>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <span>Location: Metropolis (Vietnam) 🌍</span>
+                </div>
+            </div>
+            
+            <p style="margin-top: 30px; opacity: 0.7; font-size: 0.9rem;">
+                © 2025 ProStores. All applications developed with super powers from Vietnam 🇻🇳💪
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
