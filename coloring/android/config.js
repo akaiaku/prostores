@@ -25,9 +25,9 @@
         },
         "unity_ads": {
             "enable": true,
-            "game_id": "5802043",
-            "banner": "Banner_iOS",
-            "interstitial": "Interstitial_iOS",
+            "game_id": "5914802",
+            "banner": "Banner_Android",
+            "interstitial": "Interstitial_Android",
             "ecmp": "9"
         }
     },
