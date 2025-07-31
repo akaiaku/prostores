@@ -4,7 +4,7 @@
         "limitAdsTime": 300000,
         "mute": true,
         "admob": {
-            "enable": false,
+            "enable": true,
             "app_id": "ca-app-pub-7223114719058225~6538381743",
             "banner": "ca-app-pub-7223114719058225/1884820869",
             "interstitial": "ca-app-pub-7223114719058225/7987194785",
@@ -24,7 +24,7 @@
             "enable": false
         },
         "unity_ads": {
-            "enable": false,
+            "enable": true,
             "game_id": "5802043",
             "banner": "Banner_iOS",
             "interstitial": "Interstitial_iOS",
