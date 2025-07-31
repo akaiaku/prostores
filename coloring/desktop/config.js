@@ -39,6 +39,7 @@
     "inapp" : {
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
         "share_url": "",
+        "domain": "https://raw.githubusercontent.com/tomatou001/-dszzffk-3/refs/heads/main",
         "update": {
           "versionCode": 0,
           "link": "",
