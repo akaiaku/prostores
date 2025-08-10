@@ -16,7 +16,10 @@
             line-height: 1.6;
             color: #333;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
             min-height: 100vh;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
         }
 
         .container {
@@ -58,10 +61,12 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             text-align: center;
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         .app-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) translateZ(0);
             box-shadow: 0 30px 60px rgba(0,0,0,0.2);
         }
 
@@ -71,11 +76,13 @@
             border-radius: 25px;
             margin: 0 auto 30px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         .app-card:hover .app-icon {
-            transform: scale(1.05);
+            transform: scale(1.05) translateZ(0);
             box-shadow: 0 15px 35px rgba(0,0,0,0.25);
         }
 
@@ -138,12 +145,14 @@
             text-decoration: none;
             border-radius: 25px;
             font-weight: 500;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         .app-link:hover {
-            transform: translateY(-2px);
+            transform: translateY(-2px) translateZ(0);
             box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
         }
 
