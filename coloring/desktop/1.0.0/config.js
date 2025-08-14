@@ -5,9 +5,9 @@
         "mute": true,
         "admob": {
             "enable": true,
-            "app_id": "ca-app-pub-7223114719058225~6346810051",
-            "banner": "ca-app-pub-7223114719058225/1533467077",
-            "interstitial": "ca-app-pub-7223114719058225/7907303730",
+            "app_id": "ca-app-pub-7223114719058225~6538381743",
+            "banner": "ca-app-pub-7223114719058225/1884820869",
+            "interstitial": "ca-app-pub-7223114719058225/7987194785",
             "interstitialVideo": "",
             "rewardVideo": "",
             "nativeExpress": "",
@@ -25,7 +25,7 @@
         },
         "unity_ads": {
             "enable": true,
-            "game_id": "5914803",
+            "game_id": "5802043",
             "banner": "Banner_iOS",
             "interstitial": "Interstitial_iOS",
             "ecmp": "9"
@@ -39,7 +39,7 @@
     "inapp" : {
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
         "share_url": "",
-        "domain": "https://raw.githubusercontent.com/tomatou001/-dszzffk-3/refs/heads/main",
+        "domain": "https://raw.githubusercontent.com/tomatou001/s_te_st/refs/heads/main",
         "update": {
           "versionCode": 0,
           "link": "",
