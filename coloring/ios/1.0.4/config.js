@@ -24,7 +24,7 @@
             "enable": false
         },
         "unity_ads": {
-            "enable": true,
+            "enable": false,
             "game_id": "5914803",
             "banner": "Banner_iOS",
             "interstitial": "Interstitial_iOS",
