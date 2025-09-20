@@ -4,7 +4,7 @@
         "limitAdsTime": 300000,
         "mute": true,
         "admob": {
-            "enable": true,
+            "enable": false,
             "app_id": "ca-app-pub-7223114719058225~6538381743",
             "banner": "ca-app-pub-7223114719058225/1884820869",
             "interstitial": "ca-app-pub-7223114719058225/7987194785",
