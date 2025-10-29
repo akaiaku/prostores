@@ -6,8 +6,8 @@
         "admob": {
             "enable": true,
             "app_id": "ca-app-pub-7223114719058225~6538381743",
-            "banner": "ca-app-pub-7223114719058225/1884820869",
-            "interstitial": "ca-app-pub-7223114719058225/7987194785",
+            "banner": "ca-app-pub-7223114719058225/6752033221",
+            "interstitial": "ca-app-pub-7223114719058225/2725158309",
             "interstitialVideo": "",
             "rewardVideo": "",
             "nativeExpress": "",
