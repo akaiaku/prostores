@@ -30,23 +30,15 @@
             "interstitial": "Interstitial_Android",
             "ecmp": "9"
         },
-        "iron_src": {
-            "enable": true,
-            "game_id": "242c61dbd",
-            "banner": "mzcdqi1jr9g3y9jh",
-            "interstitial": "dru1cqwu27bb6maz",
-            "native": "sduirbhhpjai448m",
-            "ecmp": "9"
-        },
         "vungle": {
             "ecmp": "0.95",
-            "placement_interstitial": "DEFAULT51196",
-            "placement_ref_banner_id": "BANNER_250-1883709",
-            "placement_ref_native_id": "NATIVE250-5456932",
+            "placement_interstitial": "PLACEMENT_INTERSTITIAL-4255975",
+            "placement_ref_banner_id": "PLACEMENT_REF_BANNER_ID-8647405",
+            "placement_ref_native_id": "PLACEMENT_REF_NATIVE_ID-4673008",
             "placement_ref_id": "",
             "report_id": "598c150d9fa26d1d690030b9",
-            "app_id": "test00000000001",
-            "enable": false
+            "app_id": "690defaeb08c2c75c9e1c709",
+            "enable": true
         }
     },
     "payments": {
