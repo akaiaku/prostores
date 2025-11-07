@@ -47,7 +47,7 @@
             "report_id": "598c150d9fa26d1d690030b9",
             "app_id": "test00000000001",
             "enable": false
-        },
+        }
     },
     "payments": {
         "crypto":{
