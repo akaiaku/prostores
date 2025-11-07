@@ -35,7 +35,7 @@
             "game_id": "242c61dbd",
             "banner": "mzcdqi1jr9g3y9jh",
             "interstitial": "dru1cqwu27bb6maz",
-            "native": "sduirbhhpjai448m"
+            "native": "sduirbhhpjai448m",
             "ecmp": "9"
         }
     },
