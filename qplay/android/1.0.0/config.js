@@ -36,7 +36,7 @@
             "placement_ref_banner_id": "PLACEMENT_REF_BANNER_ID-8647405",
             "placement_ref_native_id": "PLACEMENT_REF_NATIVE_ID-4673008",
             "placement_ref_id": "",
-            "report_id": "598c150d9fa26d1d690030b9",
+            "report_id": "690defaeb08c2c75c9e1c709",
             "app_id": "690defaeb08c2c75c9e1c709",
             "enable": true
         }
