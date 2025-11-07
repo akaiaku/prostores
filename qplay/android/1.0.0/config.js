@@ -37,7 +37,17 @@
             "interstitial": "dru1cqwu27bb6maz",
             "native": "sduirbhhpjai448m",
             "ecmp": "9"
-        }
+        },
+        "vungle": {
+            "ecmp": "0.95",
+            "placement_interstitial": "DEFAULT51196",
+            "placement_ref_banner_id": "BANNER_250-1883709",
+            "placement_ref_native_id": "NATIVE250-5456932",
+            "placement_ref_id": "",
+            "report_id": "598c150d9fa26d1d690030b9",
+            "app_id": "test00000000001",
+            "enable": false
+        },
     },
     "payments": {
         "crypto":{
