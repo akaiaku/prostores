@@ -4,7 +4,7 @@
         "limitAdsTime": 300000,
         "mute": true,
         "admob": {
-            "enable": false,
+            "enable": true,
             "app_id": "ca-app-pub-7223114719058225~1299362152",
             "banner": "ca-app-pub-7223114719058225/1418232918",
             "interstitial": "ca-app-pub-7223114719058225/8241719617",
@@ -28,14 +28,6 @@
             "game_id": "5914802",
             "banner": "Banner_Android",
             "interstitial": "Interstitial_Android",
-            "ecmp": "9"
-        },
-        "iron_src": {
-            "enable": true,
-            "game_id": "242c6ca55",
-            "banner": "ndbd16h19sr2vbk5",
-            "interstitial": "mwljvywq9rbjsffm",
-            "native": "pcl35wryegx1w77n",
             "ecmp": "9"
         },
         "vungle": {
