@@ -38,7 +38,7 @@
             "placement_ref_id": "",
             "report_id": "690defaeb08c2c75c9e1c709",
             "app_id": "690defaeb08c2c75c9e1c709",
-            "enable": true
+            "enable": false
         }
     },
     "payments": {
