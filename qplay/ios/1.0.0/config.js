@@ -15,7 +15,7 @@
             "showIntertisialPercent": 20,
             "nativeAdvance": "ca-app-pub-7223114719058225/1003299943",
             "showBanner": true,
-            "showNativeAdvance": false,
+            "showNativeAdvance": true,
             "ecmp": "22"
         },
         "house_ads": {
@@ -25,9 +25,9 @@
         },
         "unity_ads": {
             "enable": true,
-            "game_id": "5914802",
-            "banner": "Banner_Android",
-            "interstitial": "Interstitial_Android",
+            "game_id": "5980945",
+            "banner": "Banner_iOS",
+            "interstitial": "Interstitial_iOS",
             "ecmp": "9"
         },
         "vungle": {
