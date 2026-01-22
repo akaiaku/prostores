@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickMind - Smart Note Taking App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header .emoji {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .features {
+            background: white;
+            border-radius: 20px;
+            margin: 40px 0;
+            padding: 60px 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #2c3e50;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            padding: 30px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 1px solid #dee2e6;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .feature-card p {
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-card ul li {
+            padding: 5px 0;
+            color: #495057;
+        }
+
+        .feature-card ul li:before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .tech-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin: 40px 0;
+        }
+
+        .tech-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .tech-item {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .tech-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #ecf0f1;
+        }
+
+        .tech-item p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .security-section {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .security-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .security-section .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .security-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .security-item {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .roadmap {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin: 40px 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .roadmap h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #2c3e50;
+        }
+
+        .roadmap-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .roadmap-item {
+            padding: 30px;
+            border-left: 4px solid #3498db;
+            background: #f8f9fa;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .roadmap-item h3 {
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+
+        .roadmap-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .roadmap-item ul li {
+            padding: 5px 0;
+            color: #495057;
+        }
+
+        .roadmap-item ul li:before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .footer-links a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.1);
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ecf0f1;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .header p {
+                font-size: 1.1rem;
+            }
+
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .features,
+            .tech-section,
+            .security-section,
+            .roadmap {
+                padding: 40px 20px;
+            }
+
+            .features h2,
+            .tech-section h2,
+            .security-section h2,
+            .roadmap h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <span class="emoji">📝</span>
+            <h1>QuickMind</h1>
+            <p>Smart note-taking app - Capture your thoughts, organize your ideas, protect your privacy</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Privacy Protected</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">Local</span>
+                    <span class="stat-label">Data Storage</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">AES-256</span>
+                    <span class="stat-label">Encryption</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">Easy</span>
+                    <span class="stat-label">To Use</span>
+                </div>
+            </div>
+
+            <div class="download-buttons">
+                <a href="https://play.google.com/store" class="btn">📥 Download on Google Play</a>
+                <a href="privacy_policy.html" class="btn">🛡️ Privacy Policy</a>
+                <a href="terms_of_service.html" class="btn">📋 Terms of Service</a>
+            </div>
+        </header>
+
+        <!-- Features Section -->
+        <section class="features">
+            <h2>🎯 Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="icon">📝</span>
+                    <h3>Rich Text Editor</h3>
+                    <p>Create beautiful notes with rich formatting</p>
+                    <ul>
+                        <li>Bold, italic, underline formatting</li>
+                        <li>Bullet and numbered lists</li>
+                        <li>Headers and subheaders</li>
+                        <li>Insert images and attachments</li>
+                        <li>Color highlighting</li>
+                        <li>Markdown support</li>
+                        <li>Auto-save functionality</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <span class="icon">📁</span>
+                    <h3>Smart Organization</h3>
+                    <p>Keep your notes organized with folders and tags</p>
+                    <ul>
+                        <li>Create unlimited folders</li>
+                        <li>Nested folder structure</li>
+                        <li>Quick search functionality</li>
+                        <li>Sort by date, title, or custom</li>
+                        <li>Pin important notes</li>
+                        <li>Archive completed notes</li>
+                        <li>Tag-based categorization</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <span class="icon">🔒</span>
+                    <h3>Password Protection</h3>
+                    <p>Secure your private notes with password encryption</p>
+                    <ul>
+                        <li>AES-256 encryption</li>
+                        <li>Individual note protection</li>
+                        <li>Secure password hashing</li>
+                        <li>Biometric unlock (fingerprint)</li>
+                        <li>Auto-lock timer</li>
+                        <li>No password recovery (for security)</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <span class="icon">⚙️</span>
+                    <h3>Customization</h3>
+                    <p>Personalize your note-taking experience</p>
+                    <ul>
+                        <li>Dark/Light theme modes</li>
+                        <li>Multiple font options</li>
+                        <li>Adjustable font sizes</li>
+                        <li>Custom templates</li>
+                        <li>Multiple languages</li>
+                        <li>Export to PDF/Text</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Security Section -->
+        <section class="security-section">
+            <span class="icon">�</span>
+            <h2>Security & Privacy</h2>
+            <p>Your data is completely protected with advanced encryption and local storage</p>
+            
+            <div class="security-features">
+                <div class="security-item">
+                    <h4>🔐 Data Encryption</h4>
+                    <p>All sensitive data is encrypted</p>
+                </div>
+                <div class="security-item">
+                    <h4>🏠 Local Storage</h4>
+                    <p>Data is only stored on your device</p>
+                </div>
+                <div class="security-item">
+                    <h4>🚫 No Data Collection</h4>
+                    <p>No information is sent to servers</p>
+                </div>
+                <div class="security-item">
+                    <h4>🔑 Secure Storage</h4>
+                    <p>Encryption keys are stored securely</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="roadmap">
+            <h2>🌟 Why Choose QuickMind?</h2>
+            <div class="roadmap-timeline">
+                <div class="roadmap-item">
+                    <h3>🔒 Privacy First</h3>
+                    <ul>
+                        <li>100% local data storage</li>
+                        <li>No cloud sync or data transmission</li>
+                        <li>AES-256 encryption for protected notes</li>
+                        <li>Full control over your notes</li>
+                    </ul>
+                </div>
+                
+                <div class="roadmap-item">
+                    <h3>⚡ Simple & Powerful</h3>
+                    <ul>
+                        <li>Intuitive rich text editor</li>
+                        <li>Smart folder organization</li>
+                        <li>Lightning-fast search</li>
+                        <li>Offline-first design</li>
+                    </ul>
+                </div>
+
+                <div class="roadmap-item">
+                    <h3>🎨 User-Friendly</h3>
+                    <ul>
+                        <li>Beautiful and modern interface</li>
+                        <li>Customizable themes and fonts</li>
+                        <li>Regular updates and improvements</li>
+                        <li>No ads, no tracking</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <h3>📝 Support & Contact</h3>
+            <div class="footer-links">
+                <a href="mailto:linhhvtt@gmail.com">📧 Email Support</a>
+                <a href="privacy_policy.html">🛡️ Privacy Policy</a>
+                <a href="terms_of_service.html">📋 Terms of Service</a>
+            </div>
+            <p style="margin-top: 30px; opacity: 0.8;">
+                <strong>QuickMind</strong> - Your notes, your privacy, your control! 🚀📝
+            </p>
+            <p style="opacity: 0.6; margin-top: 10px;">
+                © 2026 QuickMind. Made with ❤️ for better note-taking
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
