@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px 20px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        footer {
+            background: #333;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Family Store</h1>
+        <p>Ứng dụng quản lý mua sắm cho gia đình</p>
+    </header>
+    
+    <div class="container">
+        <div class="content">
+            <h2>Chào mừng đến với Family Store</h2>
+            <p>Ứng dụng giúp gia đình bạn quản lý danh sách mua sắm một cách dễ dàng và hiệu quả.</p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <h3>📝 Danh sách mua sắm</h3>
+                    <p>Tạo và quản lý danh sách mua sắm cho cả gia đình</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>👨‍👩‍👧‍👦 Chia sẻ gia đình</h3>
+                    <p>Đồng bộ danh sách với các thành viên trong gia đình</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>💰 Quản lý chi tiêu</h3>
+                    <p>Theo dõi chi tiêu và ngân sách mua sắm</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2026 Family Store. All rights reserved.</p>
+        <div>
+            <a href="privacy_policy.html">Chính sách bảo mật</a> |
+            <a href="terms_of_service.html">Điều khoản sử dụng</a>
+        </div>
+    </footer>
+</body>
+</html>
