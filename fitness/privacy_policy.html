@@ -251,7 +251,7 @@
         </div>
         <span class="card-title">2. How Data Is Stored</span>
       </div>
-      <p class="card-body">All data is stored locally on your device using an encrypted SQLite database. No data is uploaded to any remote server. Uninstalling the app permanently removes all stored data.</p>
+      <p class="card-body">All workout data (sessions, routes, goals) is stored locally on your device using an encrypted SQLite database and is never uploaded to any server by Fitness Hub. Uninstalling the app permanently removes all stored data. Note: third-party SDKs embedded in the app (see sections 3 and 7) may independently transmit limited, non-identifiable data to their own servers.</p>
     </div>
 
     <!-- 3. Third-Party Services -->
@@ -263,11 +263,13 @@
         </div>
         <span class="card-title">3. Third-Party Services</span>
       </div>
-      <p class="card-body">If you grant permission, the app may read from or write to:</p>
+      <p class="card-body">The app integrates the following third-party services:</p>
       <ul class="bullet-list">
-        <li><span class="bullet-dot" style="background:var(--blue)"></span><span>Health Connect (Android) — syncing step count, heart rate, and calories</span></li>
+        <li><span class="bullet-dot" style="background:var(--blue)"></span><span>Health Connect (Android) — syncing step count, heart rate, and calories (only if you enable it)</span></li>
+        <li><span class="bullet-dot" style="background:var(--blue)"></span><span>Google AdMob — displays in-app ads. The AdMob SDK may collect the Advertising ID and approximate device location for ad relevance. No precise GPS coordinates are shared.</span></li>
+        <li><span class="bullet-dot" style="background:var(--blue)"></span><span>Firebase Analytics — collects anonymous screen-navigation events (no personal data or location coordinates are logged).</span></li>
       </ul>
-      <p class="card-footer">These services are governed by their own privacy policies. Fitness Hub does not control or have access to data stored within those platforms beyond what you explicitly grant.</p>
+      <p class="card-footer">These services are governed by their own privacy policies. Fitness Hub does not control or have access to data collected by those SDKs beyond what is described here.</p>
     </div>
 
     <!-- 4. Location Data -->
@@ -279,7 +281,7 @@
         </div>
         <span class="card-title">4. Location Data</span>
       </div>
-      <p class="card-body">GPS location is accessed only during an active workout session and only when you press Start. Location is never collected in the background outside of workout recording. Route coordinates are stored locally and never transmitted.</p>
+      <p class="card-body">GPS location is accessed, collected, and used only during an active workout session (after you explicitly grant permission and press Start). Location is not collected in the background outside of an active workout recording. Route coordinates are stored on-device only and are never transmitted by Fitness Hub. The Google AdMob SDK (used for in-app advertising) may independently use the device's approximate location for ad targeting — this is governed by Google's Privacy Policy, not Fitness Hub. You can limit this in your device's Privacy → Ads settings.</p>
     </div>
 
     <!-- 5. Notifications -->
@@ -315,7 +317,13 @@
         </div>
         <span class="card-title">7. Advertising</span>
       </div>
-      <p class="card-body">This app may display ads provided by third-party advertising networks. These networks may use anonymous identifiers (such as Advertising ID) to serve relevant ads. No personally identifiable information is shared with advertisers. You can reset or opt out of personalized ads at any time in your device's Privacy settings.</p>
+      <p class="card-body">This app displays ads via Google AdMob. The AdMob SDK may collect and use:</p>
+      <ul class="bullet-list">
+        <li><span class="bullet-dot" style="background:var(--red)"></span><span>Advertising ID — a resettable, anonymous device identifier used for ad personalization.</span></li>
+        <li><span class="bullet-dot" style="background:var(--red)"></span><span>Approximate device location — used by Google to serve geographically relevant ads. Fitness Hub does not share your precise GPS workout coordinates with AdMob.</span></li>
+        <li><span class="bullet-dot" style="background:var(--red)"></span><span>App usage signals — such as which screens you visit, used to improve ad relevance.</span></li>
+      </ul>
+      <p class="card-footer">No personally identifiable information (name, email, exact GPS coordinates) is shared with advertisers by Fitness Hub. You can reset your Advertising ID or opt out of ad personalization at any time in your device's Settings → Privacy → Ads.</p>
     </div>
 
     <!-- 8. Contact -->
