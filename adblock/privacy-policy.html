@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — AdBlock — Ads, Trackers & Site Control</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #1a1a2e;
+      background: #f8f9fc;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #fff;
+      padding: 48px 24px 40px;
+      text-align: center;
+    }
+
+    header .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: rgba(255,255,255,0.7);
+      font-size: 15px;
+    }
+
+    main {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    .toc {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 40px;
+    }
+
+    .toc h2 {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #64748b;
+      margin-bottom: 12px;
+    }
+
+    .toc ol {
+      list-style: decimal;
+      padding-left: 20px;
+    }
+
+    .toc li { margin: 4px 0; }
+
+    .toc a {
+      color: #3b82f6;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    .toc a:hover { text-decoration: underline; }
+
+    section {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 32px 36px;
+      margin-bottom: 24px;
+    }
+
+    section h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    section h2 .icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .icon-green  { background: #dcfce7; }
+    .icon-blue   { background: #dbeafe; }
+    .icon-purple { background: #ede9fe; }
+    .icon-orange { background: #ffedd5; }
+    .icon-teal   { background: #ccfbf1; }
+    .icon-red    { background: #fee2e2; }
+    .icon-slate  { background: #f1f5f9; }
+
+    p { margin-bottom: 12px; color: #374151; }
+    p:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      padding-left: 22px;
+      margin-bottom: 12px;
+      color: #374151;
+    }
+
+    li { margin: 6px 0; }
+
+    .chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .chip {
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 13px;
+      font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+      color: #1e40af;
+    }
+
+    .highlight-box {
+      background: #f0fdf4;
+      border-left: 4px solid #22c55e;
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 15px;
+      color: #166534;
+    }
+
+    .warn-box {
+      background: #fff7ed;
+      border-left: 4px solid #f97316;
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 15px;
+      color: #9a3412;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    th {
+      background: #f8fafc;
+      text-align: left;
+      padding: 10px 14px;
+      font-weight: 600;
+      color: #64748b;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #374151;
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    a { color: #3b82f6; }
+
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: #94a3b8;
+      font-size: 13px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    footer a { color: #64748b; }
+
+    @media (max-width: 600px) {
+      section { padding: 24px 20px; }
+      header h1 { font-size: 1.5rem; }
+      .toc { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge">🔒 Privacy Policy</div>
+  <h1>AdBlock: Privacy &amp; Focus</h1>
+  <p>Last updated: April 3, 2026 &nbsp;·&nbsp; Version 1.0.0</p>
+</header>
+
+<main>
+
+  <!-- Table of Contents -->
+  <div class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#summary">One-line Summary</a></li>
+      <li><a href="#data-collected">Data We Collect</a></li>
+      <li><a href="#permissions">Permissions Explained</a></li>
+      <li><a href="#remote-code">Remote Data Fetching</a></li>
+      <li><a href="#third-party">Third-Party Services</a></li>
+      <li><a href="#data-sharing">Data Sharing &amp; Sale</a></li>
+      <li><a href="#children">Children's Privacy</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ol>
+  </div>
+
+  <!-- 1. Summary -->
+  <section id="summary">
+    <h2><span class="icon icon-green">✅</span> One-line Summary</h2>
+    <div class="highlight-box">
+      <strong>AdBlock: Privacy &amp; Focus does not collect, transmit, or sell any personal data.</strong>
+      All settings are stored locally on your device. We never see your browsing history.
+    </div>
+    <p>
+      This extension is a client-side ad and tracker blocker. Its sole purpose is to block ads,
+      trackers, and malicious domains using Chrome's built-in <code>declarativeNetRequest</code> API,
+      and to offer optional Focus Mode and referrer anonymization tools.
+    </p>
+  </section>
+
+  <!-- 2. Data Collected -->
+  <section id="data-collected">
+    <h2><span class="icon icon-blue">📦</span> Data We Collect</h2>
+
+    <p><strong>Data stored locally on your device (never transmitted):</strong></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Purpose</th>
+          <th>Where stored</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Blocking on/off state</td>
+          <td>Remember your preference across sessions</td>
+          <td><code>chrome.storage.local</code></td>
+        </tr>
+        <tr>
+          <td>Paused / allowlisted domains</td>
+          <td>Skip blocking on sites you choose</td>
+          <td><code>chrome.storage.local</code></td>
+        </tr>
+        <tr>
+          <td>Focus Mode domains &amp; timer</td>
+          <td>Block distracting sites during focus sessions</td>
+          <td><code>chrome.storage.local</code></td>
+        </tr>
+        <tr>
+          <td>Privacy settings (referrer toggle)</td>
+          <td>Apply your chosen privacy settings</td>
+          <td><code>chrome.storage.local</code></td>
+        </tr>
+        <tr>
+          <td>Blocking stats (counts)</td>
+          <td>Show you how many requests were blocked</td>
+          <td><code>chrome.storage.local</code></td>
+        </tr>
+        <tr>
+          <td>Cached remote blocklist rules</td>
+          <td>Apply up-to-date malware blocking without re-fetching every page load</td>
+          <td><code>chrome.storage.local</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top: 16px;">
+      <strong>Data we do NOT collect:</strong> browsing history, URLs you visit, search queries,
+      form inputs, passwords, IP addresses, device identifiers, or any personally identifiable
+      information.
+    </p>
+  </section>
+
+  <!-- 3. Permissions -->
+  <section id="permissions">
+    <h2><span class="icon icon-purple">🔑</span> Permissions Explained</h2>
+    <p>The extension requests the minimum permissions required to function:</p>
+
+    <div class="chip-list">
+      <span class="chip">declarativeNetRequest</span>
+      <span class="chip">storage</span>
+      <span class="chip">tabs</span>
+      <span class="chip">alarms</span>
+      <span class="chip">&lt;all_urls&gt;</span>
+    </div>
+
+    <table style="margin-top: 20px;">
+      <thead>
+        <tr>
+          <th>Permission</th>
+          <th>Why it is needed</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>declarativeNetRequest</code></td>
+          <td>Blocks ad, tracker, and malware network requests at the browser level.
+              Also used for referrer header anonymization (<code>modifyHeaders</code>).
+              Chrome enforces all rules internally — the extension never reads request content.</td>
+        </tr>
+        <tr>
+          <td><code>storage</code></td>
+          <td>Saves your settings, allowlist, and stats locally via
+              <code>chrome.storage.local</code>. Nothing is synced to any server.</td>
+        </tr>
+        <tr>
+          <td><code>tabs</code></td>
+          <td>Reads the current tab's URL so the popup can show per-site blocking status
+              and allow you to pause blocking on the current site. Tab URLs are used
+              in memory only and never stored or transmitted.</td>
+        </tr>
+        <tr>
+          <td><code>alarms</code></td>
+          <td>Schedules a daily background task to refresh remote malware blocklists,
+              and to auto-expire Focus Mode timers even when the extension popup is closed.</td>
+        </tr>
+        <tr>
+          <td><code>&lt;all_urls&gt;</code> (host permission)</td>
+          <td>Required by <code>declarativeNetRequest</code> to apply blocking rules across
+              all websites. Without broad host access, network-level blocking cannot work
+              on arbitrary URLs. The extension does <strong>not</strong> read page content
+              via this permission.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 4. Remote Data -->
+  <section id="remote-code">
+    <h2><span class="icon icon-orange">🌐</span> Remote Data Fetching</h2>
+    <p>
+      The extension periodically fetches <strong>plain-text domain blocklists</strong> from
+      two trusted public sources:
+    </p>
+    <ul>
+      <li>
+        <strong>URLhaus</strong> (abuse.ch) —
+        <a href="https://urlhaus.abuse.ch/downloads/hostfile/" target="_blank" rel="noopener">
+          urlhaus.abuse.ch/downloads/hostfile/
+        </a><br/>
+        A community-maintained feed of live malware distribution domains.
+      </li>
+      <li>
+        <strong>Phishing Army</strong> —
+        <a href="https://phishing.army/download/phishing_army_blocklist.txt" target="_blank" rel="noopener">
+          phishing.army/download/phishing_army_blocklist.txt
+        </a><br/>
+        An aggregated blocklist of known phishing domains.
+      </li>
+    </ul>
+    <div class="warn-box">
+      These requests fetch <strong>data only</strong> — plain text files containing domain names,
+      one per line. No JavaScript is downloaded or executed from remote servers.
+      The fetched domains are converted locally into <code>declarativeNetRequest</code> rules.
+    </div>
+    <p>
+      These fetch requests are made by the extension's service worker, not on behalf of any
+      specific web page you visit. They do not carry your browsing history or identity.
+      Updates occur at most once every 24 hours.
+    </p>
+  </section>
+
+  <!-- 5. Third-Party Services -->
+  <section id="third-party">
+    <h2><span class="icon icon-teal">🔗</span> Third-Party Services</h2>
+    <p>
+      The extension does not integrate any third-party analytics, crash reporting, advertising,
+      or tracking SDKs. The only external network requests are the blocklist fetches described
+      in Section 4 above.
+    </p>
+    <p>
+      The extension's source code does not include any monetization scripts, sponsored
+      whitelists, or "acceptable ads" programs. All blocking rules are applied equally.
+    </p>
+  </section>
+
+  <!-- 6. Data Sharing -->
+  <section id="data-sharing">
+    <h2><span class="icon icon-red">🚫</span> Data Sharing &amp; Sale</h2>
+    <div class="highlight-box">
+      We do not sell, share, rent, or trade any user data with any third party, ever.
+    </div>
+    <p>
+      Because no personal data is collected, there is nothing to share. All processing
+      happens entirely within your browser using local storage and Chrome's native APIs.
+    </p>
+  </section>
+
+  <!-- 7. Children -->
+  <section id="children">
+    <h2><span class="icon icon-slate">👶</span> Children's Privacy</h2>
+    <p>
+      This extension does not collect any information from anyone, including children under
+      the age of 13. It complies with the Children's Online Privacy Protection Act (COPPA)
+      by design — no data collection takes place.
+    </p>
+  </section>
+
+  <!-- 8. Contact -->
+  <section id="contact">
+    <h2><span class="icon icon-blue">✉️</span> Contact</h2>
+    <p>
+      If you have any questions about this privacy policy or the extension's data practices,
+      please contact us by email or support the project via PayPal:
+    </p>
+    <ul>
+      <li>Email: <a href="mailto:hoangvanlinh421@gmail.com">hoangvanlinh421@gmail.com</a></li>
+      <li>Donate: <a href="https://www.paypal.me/linhhvtt" target="_blank" rel="noopener">paypal.me/linhhvtt</a></li>
+    </ul>
+    <p>
+      This policy may be updated to reflect changes in the extension's functionality.
+      The "Last updated" date at the top of this page will always reflect the most recent revision.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 AdBlock: Privacy &amp; Focus &nbsp;·&nbsp; <a href="https://www.paypal.me/linhhvtt">Support the project</a></p>
+</footer>
+
+</body>
+</html>
