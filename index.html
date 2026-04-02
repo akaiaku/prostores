@@ -4,363 +4,985 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProStores - High Quality Mobile Applications</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * {
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            background-attachment: fixed;
-            min-height: 100vh;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.07);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            --accent-blue: #4f8ef7;
+            --accent-purple: #a855f7;
+            --accent-pink: #ec4899;
+            --accent-green: #22d3a0;
+            --accent-orange: #fb923c;
+            --text-primary: rgba(255,255,255,0.95);
+            --text-secondary: rgba(255,255,255,0.6);
+            --radius-xl: 24px;
+            --radius-2xl: 32px;
         }
 
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0f;
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ── Aurora background ── */
+        .aurora {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .aurora-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.35;
+            animation: drift 18s ease-in-out infinite alternate;
+        }
+
+        .aurora-blob:nth-child(1) {
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, #7c3aed, transparent 70%);
+            top: -200px; left: -200px;
+            animation-duration: 20s;
+        }
+        .aurora-blob:nth-child(2) {
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, #2563eb, transparent 70%);
+            top: 30%; right: -150px;
+            animation-duration: 25s;
+            animation-delay: -5s;
+        }
+        .aurora-blob:nth-child(3) {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, #db2777, transparent 70%);
+            bottom: -100px; left: 30%;
+            animation-duration: 22s;
+            animation-delay: -10s;
+        }
+        .aurora-blob:nth-child(4) {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, #059669, transparent 70%);
+            top: 60%; left: -100px;
+            animation-duration: 28s;
+            animation-delay: -8s;
+        }
+
+        @keyframes drift {
+            0%   { transform: translate(0, 0) scale(1); }
+            33%  { transform: translate(60px, -80px) scale(1.1); }
+            66%  { transform: translate(-40px, 60px) scale(0.95); }
+            100% { transform: translate(30px, -30px) scale(1.05); }
+        }
+
+        /* ── Noise overlay ── */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.4;
+        }
+
+        /* ── Layout ── */
         .container {
+            position: relative;
+            z-index: 2;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 24px 80px;
         }
 
-        .header {
+        /* ── Navbar ── */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            margin: 0 -24px 0;
+            background: rgba(10, 10, 15, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .navbar-brand {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a78bfa, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .navbar-pill {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: var(--text-secondary);
+        }
+
+        /* ── Hero ── */
+        .hero {
             text-align: center;
-            padding: 60px 0 40px;
-            color: white;
+            padding: 100px 0 70px;
         }
 
-        .header h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-purple);
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 28px;
+            animation: fadeInDown 0.6s ease both;
         }
 
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
+        .hero-eyebrow::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--accent-purple);
+            animation: pulse-dot 2s ease infinite;
         }
 
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: 0.5; transform: scale(0.7); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+            animation: fadeInDown 0.6s 0.1s ease both;
+        }
+
+        .grad-text {
+            background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 40%, #34d399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 520px;
+            margin: 0 auto 48px;
+            line-height: 1.7;
+            font-weight: 400;
+            animation: fadeInDown 0.6s 0.2s ease both;
+        }
+
+        /* Stats bar */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            flex-wrap: wrap;
+            animation: fadeInDown 0.6s 0.3s ease both;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a78bfa, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ── Section title ── */
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 64px 0 32px;
+            animation: fadeInLeft 0.5s ease both;
+        }
+
+        .section-label-text {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .section-label-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.12), transparent);
+        }
+
+        /* ── App Grid ── */
         .apps-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 40px;
-            margin: 40px 0;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
         }
 
+        /* ── Glass Card ── */
         .app-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            text-align: center;
-            will-change: transform;
-            transform: translateZ(0);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-2xl);
+            padding: 36px 32px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        box-shadow 0.4s ease,
+                        border-color 0.3s ease;
+            cursor: pointer;
         }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .app-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent 270deg, rgba(255,255,255,0.04), transparent);
+            animation: card-rotate 12s linear infinite;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        @keyframes card-rotate { to { transform: rotate(360deg); } }
 
         .app-card:hover {
-            transform: translateY(-10px) translateZ(0);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.15);
+        }
+
+        .app-card:hover::after { opacity: 1; }
+
+        /* Colored glow per card */
+        .app-card[data-glow="blue"]:hover   { box-shadow: 0 24px 50px rgba(79,142,247,0.25), 0 0 0 1px rgba(79,142,247,0.3); }
+        .app-card[data-glow="purple"]:hover { box-shadow: 0 24px 50px rgba(168,85,247,0.25), 0 0 0 1px rgba(168,85,247,0.3); }
+        .app-card[data-glow="pink"]:hover   { box-shadow: 0 24px 50px rgba(236,72,153,0.25), 0 0 0 1px rgba(236,72,153,0.3); }
+        .app-card[data-glow="green"]:hover  { box-shadow: 0 24px 50px rgba(34,211,160,0.25), 0 0 0 1px rgba(34,211,160,0.3); }
+
+        /* ── Card header ── */
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .app-icon-wrap {
+            position: relative;
+            flex-shrink: 0;
         }
 
         .app-icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 25px;
-            margin: 0 auto 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            will-change: transform;
-            transform: translateZ(0);
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: block;
         }
 
         .app-card:hover .app-icon {
-            transform: scale(1.05) translateZ(0);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+            transform: scale(1.08) rotate(-2deg);
         }
+
+        .card-title-block { flex: 1; }
 
         .app-title {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: #2c3e50;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+
+        .app-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.68rem;
             font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
         }
 
+        .tag-blue   { background: rgba(79,142,247,0.15);  color: #7eb5ff;  border: 1px solid rgba(79,142,247,0.25); }
+        .tag-purple { background: rgba(168,85,247,0.15);  color: #c084fc;  border: 1px solid rgba(168,85,247,0.25); }
+        .tag-pink   { background: rgba(236,72,153,0.15);  color: #f472b6;  border: 1px solid rgba(236,72,153,0.25); }
+        .tag-green  { background: rgba(34,211,160,0.15);  color: #6ee7b7;  border: 1px solid rgba(34,211,160,0.25); }
+        .tag-orange { background: rgba(251,146,60,0.15);  color: #fdba74;  border: 1px solid rgba(251,146,60,0.25); }
+
+        .tag-new {
+            background: linear-gradient(135deg, rgba(251,146,60,0.2), rgba(236,72,153,0.2));
+            color: #fdba74;
+            border: 1px solid rgba(251,146,60,0.35);
+            animation: glow-new 2.5s ease infinite;
+        }
+
+        @keyframes glow-new {
+            0%, 100% { box-shadow: 0 0 0 rgba(251,146,60,0); }
+            50%       { box-shadow: 0 0 10px rgba(251,146,60,0.4); }
+        }
+
+        /* ── Divider ── */
+        .card-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            margin: 20px 0;
+        }
+
+        /* ── Description ── */
         .app-description {
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 30px;
-            line-height: 1.6;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 20px;
         }
 
-        .app-features {
-            text-align: left;
-            margin-bottom: 30px;
-        }
-
+        /* ── Feature list ── */
         .app-features h4 {
-            color: #3498db;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
         }
 
         .app-features ul {
             list-style: none;
-            padding-left: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            margin-bottom: 24px;
         }
 
         .app-features li {
-            padding: 5px 0;
-            color: #555;
-            position: relative;
-            padding-left: 20px;
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.75);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.4;
         }
 
-        .app-features li:before {
-            content: "✓";
-            color: #27ae60;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
+        .feat-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            margin-top: 5px;
+            flex-shrink: 0;
         }
 
+        .dot-blue   { background: var(--accent-blue); }
+        .dot-purple { background: var(--accent-purple); }
+        .dot-pink   { background: var(--accent-pink); }
+        .dot-green  { background: var(--accent-green); }
+
+        /* ── Buttons ── */
         .app-links {
             display: flex;
-            justify-content: center;
-            gap: 15px;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
         .app-link {
-            padding: 12px 25px;
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-size: 0.82rem;
+            font-weight: 600;
             text-decoration: none;
-            border-radius: 25px;
-            font-weight: 500;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
-            will-change: transform;
-            transform: translateZ(0);
+            transition: all 0.25s ease;
+            white-space: nowrap;
         }
 
-        .app-link:hover {
-            transform: translateY(-2px) translateZ(0);
-            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
-        }
-
-        .app-link.details {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
-        }
-
-        .app-link.details:hover {
-            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
-        }
-
-        .footer {
-            background: rgba(44, 62, 80, 0.9);
+        .btn-primary {
+            background: linear-gradient(135deg, #4f8ef7, #7c3aed);
             color: white;
-            padding: 40px;
-            border-radius: 20px;
-            margin-top: 60px;
+            box-shadow: 0 4px 15px rgba(79,142,247,0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79,142,247,0.5);
+        }
+
+        .btn-ghost {
+            background: rgba(255,255,255,0.07);
+            color: rgba(255,255,255,0.8);
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255,255,255,0.12);
+            transform: translateY(-2px);
+        }
+
+        .btn-store {
+            background: rgba(255,255,255,0.07);
+            color: rgba(255,255,255,0.85);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-store:hover {
+            background: rgba(255,255,255,0.13);
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* ── Footer ── */
+        .footer {
+            margin-top: 80px;
+            padding: 48px 40px;
+            background: rgba(255,255,255,0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius-2xl);
             text-align: center;
-            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
         }
 
-        .footer h3 {
-            margin-bottom: 20px;
-            font-size: 1.5rem;
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(167,139,250,0.5), rgba(96,165,250,0.5), transparent);
         }
 
-        .footer p {
-            opacity: 0.8;
-            margin-bottom: 20px;
+        .footer-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .footer-sub {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            margin-bottom: 32px;
         }
 
         .contact-info {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 32px;
             flex-wrap: wrap;
-            margin-top: 20px;
+            margin-bottom: 32px;
         }
 
         .contact-item {
             display: flex;
             align-items: center;
             gap: 10px;
-            color: #ecf0f1;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.75);
+            transition: all 0.25s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255,255,255,0.09);
+            transform: translateY(-2px);
         }
 
         .contact-item a {
-            color: #3498db;
+            color: #93c5fd;
             text-decoration: none;
+            font-weight: 500;
         }
 
-        .contact-item a:hover {
-            color: #5dade2;
+        .contact-item a:hover { color: #bfdbfe; }
+
+        .footer-copy {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.35);
         }
 
+        /* ── Scroll reveal ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.2, 0.64, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* Stagger delays */
+        .reveal:nth-child(2) { transition-delay: 0.1s; }
+        .reveal:nth-child(3) { transition-delay: 0.2s; }
+        .reveal:nth-child(4) { transition-delay: 0.3s; }
+
+        /* ── Animations ── */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to   { opacity: 1; transform: none; }
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to   { opacity: 1; transform: none; }
+        }
+
+        /* ── Responsive ── */
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.2rem;
-            }
-
-            .apps-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .app-card {
-                padding: 30px 20px;
-            }
-
-            .app-icon {
-                width: 100px;
-                height: 100px;
-            }
-
-            .app-title {
-                font-size: 1.5rem;
-            }
-
-            .contact-info {
-                flex-direction: column;
-                gap: 15px;
-            }
+            .hero { padding: 72px 0 48px; }
+            .hero h1 { letter-spacing: -1px; }
+            .stats-bar { gap: 28px; }
+            .apps-grid { grid-template-columns: 1fr; }
+            .app-card { padding: 28px 22px; }
+            .navbar { padding: 14px 20px; }
+            .footer { padding: 36px 24px; }
+            .contact-info { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
 <body>
+    <!-- Aurora background -->
+    <div class="aurora" aria-hidden="true">
+        <div class="aurora-blob"></div>
+        <div class="aurora-blob"></div>
+        <div class="aurora-blob"></div>
+        <div class="aurora-blob"></div>
+    </div>
+
+    <!-- Sticky navbar -->
+    <nav class="navbar">
+        <span class="navbar-brand">⚡ ProStores</span>
+        <span class="navbar-pill">8 Apps</span>
+    </nav>
+
     <div class="container">
-        <!-- Header Section -->
-        <header class="header">
-            <h1>🚀 ProStores</h1>
-            <p>Collection of high-quality mobile applications, developed by Superman 🦸‍♂️</p>
+        <!-- Hero -->
+        <header class="hero">
+            <div class="hero-eyebrow">High Quality Mobile Apps</div>
+            <h1><span class="grad-text">ProStores</span><br>by Superman 🦸‍♂️</h1>
+            <p class="hero-sub">Handcrafted mobile experiences built with passion, precision, and super powers from Vietnam.</p>
+
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Apps</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Platforms</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Free to try</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">🇻🇳</div>
+                    <div class="stat-label">Made in Vietnam</div>
+                </div>
+            </div>
         </header>
 
-        <!-- Apps Grid -->
-        <section class="apps-grid">
-            <!-- IPA English Mastery App -->
-            <div class="app-card">
-                <img src="ipa/ic_launcher.png" alt="IPA English Mastery Icon" class="app-icon">
-                <h2 class="app-title">IPA English Mastery</h2>
+        <!-- Apps -->
+        <div class="section-label">
+            <span class="section-label-text">Our Applications</span>
+            <span class="section-label-line"></span>
+        </div>
+
+        <div class="apps-grid">
+            <!-- IPA English Mastery -->
+            <div class="app-card reveal" data-glow="blue" data-href="ipa/index.html">
+                <div class="card-header">
+                    <div class="app-icon-wrap">
+                        <img src="ipa/ic_launcher.png" alt="IPA English Mastery Icon" class="app-icon">
+                    </div>
+                    <div class="card-title-block">
+                        <h2 class="app-title">IPA English Mastery</h2>
+                        <div class="app-tags">
+                            <span class="tag tag-blue">Education</span>
+                            <span class="tag tag-green">Free</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-divider"></div>
+
                 <p class="app-description">
-                    English pronunciation learning app through the International Phonetic Alphabet (IPA). 
-                    Help you improve your pronunciation accuracy and effectively.
+                    Learn English pronunciation through the International Phonetic Alphabet. Improve your accuracy and speak with confidence.
                 </p>
-                
+
                 <div class="app-features">
-                    <h4>🎯 Key Features:</h4>
+                    <h4>Key Features</h4>
                     <ul>
-                        <li>Complete IPA chart with audio</li>
-                        <li>Detailed pronunciation guide</li>
-                        <li>Word and sentence practice exercises</li>
-                        <li>Interactive quizzes to test knowledge</li>
-                        <li>100% free</li>
+                        <li><span class="feat-dot dot-blue"></span>Complete IPA chart with audio</li>
+                        <li><span class="feat-dot dot-blue"></span>Detailed pronunciation guide</li>
+                        <li><span class="feat-dot dot-blue"></span>Word and sentence practice exercises</li>
+                        <li><span class="feat-dot dot-blue"></span>Interactive quizzes to test knowledge</li>
+                        <li><span class="feat-dot dot-blue"></span>100% free</li>
                     </ul>
                 </div>
 
                 <div class="app-links">
-                    <a href="ipa/index.html" class="app-link details">📖 Details</a>
-                    <a href="https://play.google.com/store/apps/details?id=com.tls.english" class="app-link" target="_blank">📱 Google Play</a>
-                    <a href="https://bit.ly/4lu98Lq" class="app-link" target="_blank">🍎 App Store</a>
+                    <a href="ipa/index.html" class="app-link btn-primary">📖 Details</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.tls.english" class="app-link btn-store" target="_blank">📱 Google Play</a>
+                    <a href="https://bit.ly/4lu98Lq" class="app-link btn-store" target="_blank">🍎 App Store</a>
                 </div>
             </div>
 
-            <!-- Call Filter Pro App -->
-            <div class="app-card">
-                <img src="phonecontrol/ic_launcher.png" alt="Call Filter Pro Icon" class="app-icon">
-                <h2 class="app-title">Call Filter Pro</h2>
+            <!-- Call Filter Pro -->
+            <div class="app-card reveal" data-glow="purple" data-href="phonecontrol/index.html">
+                <div class="card-header">
+                    <div class="app-icon-wrap">
+                        <img src="phonecontrol/ic_launcher.png" alt="Call Filter Pro Icon" class="app-icon">
+                    </div>
+                    <div class="card-title-block">
+                        <h2 class="app-title">Call Filter Pro</h2>
+                        <div class="app-tags">
+                            <span class="tag tag-purple">Productivity</span>
+                            <span class="tag tag-blue">Security</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-divider"></div>
+
                 <p class="app-description">
-                    Smart call management app that helps you take complete control of incoming calls. 
-                    Block spam, manage contacts and optimize your communication experience.
+                    Smart call management — block spam, control blacklists and whitelists, and get detailed call reports with complete privacy.
                 </p>
-                
+
                 <div class="app-features">
-                    <h4>🛡️ Key Features:</h4>
+                    <h4>Key Features</h4>
                     <ul>
-                        <li>Automatic spam call blocking</li>
-                        <li>Blacklist/whitelist management</li>
-                        <li>Detailed call reports</li>
-                        <li>High security and privacy</li>
-                        <li>Modern interface</li>
+                        <li><span class="feat-dot dot-purple"></span>Automatic spam call blocking</li>
+                        <li><span class="feat-dot dot-purple"></span>Blacklist / whitelist management</li>
+                        <li><span class="feat-dot dot-purple"></span>Detailed call reports</li>
+                        <li><span class="feat-dot dot-purple"></span>High security and privacy</li>
+                        <li><span class="feat-dot dot-purple"></span>Modern interface</li>
                     </ul>
                 </div>
 
                 <div class="app-links">
-                    <a href="phonecontrol/index.html" class="app-link details">📖 Details</a>
-                    <a href="#" class="app-link">📥 Download APK</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Coloring Paint & QPlay Apps -->
-        <section class="apps-grid">
-            <div class="app-card">
-                <img src="coloring/ic_launcher.png" alt="Funny Color Paint Icon" class="app-icon">
-                <h2 class="app-title">Funny Color Paint <span style='color:#e74c3c; font-size:0.7em; background:#fff3; border-radius:8px; padding:2px 8px; margin-left:8px; vertical-align:middle;'>NEW</span></h2>
-                <p class="app-description">
-                    Relax, create, and have fun! A creative coloring game for all ages. Enjoy hundreds of beautiful coloring pages, easy-to-use tools, and a safe, ad-friendly experience for kids and families.
-                </p>
-                <div class="app-features">
-                    <h4>🎨 Key Features:</h4>
-                    <ul>
-                        <li>Hundreds of coloring pages: animals, mandalas, nature, and more</li>
-                        <li>Easy tap-to-fill and brush tools</li>
-                        <li>Save and share your artwork</li>
-                        <li>Child-safe: COPPA compliant, no personal data collected</li>
-                        <li>Works offline, no account required</li>
-                        <li>Relaxing music and sound effects</li>
-                        <li>Free to play, optional in-app purchases</li>
-                    </ul>
-                </div>
-                <div class="app-links">
-                    <a href="coloring/index.html" class="app-link details">📖 Details</a>
-                    <a href="https://play.google.com/store/apps/details?id=com.free.colorpaint.pro" class="app-link">📱 Google Play</a>
-                    <a href="https://apps.apple.com/app/coloring-paint-pro/id6749254413" class="app-link">🍎 App Store</a>
+                    <a href="phonecontrol/index.html" class="app-link btn-primary">📖 Details</a>
+                    <a href="#" class="app-link btn-ghost">📥 Download APK</a>
                 </div>
             </div>
 
-            <!-- QPlay App -->
-            <div class="app-card">
-                <img src="qplay/ic_launcher.png" alt="QPlay Icon" class="app-icon">
-                <h2 class="app-title">QPlay <span style='color:#27ae60; font-size:0.7em; background:#fff3; border-radius:8px; padding:2px 8px; margin-left:8px; vertical-align:middle;'>NEW</span></h2>
+            <!-- Funny Color Paint -->
+            <div class="app-card reveal" data-glow="pink" data-href="coloring/index.html">
+                <div class="card-header">
+                    <div class="app-icon-wrap">
+                        <img src="coloring/ic_launcher.png" alt="Funny Color Paint Icon" class="app-icon">
+                    </div>
+                    <div class="card-title-block">
+                        <h2 class="app-title">Funny Color Paint</h2>
+                        <div class="app-tags">
+                            <span class="tag tag-pink">Creative</span>
+                            <span class="tag tag-green">Kids</span>
+                            <span class="tag tag-new">✦ NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-divider"></div>
+
                 <p class="app-description">
-                    A clean, simple video player focused on essentials. Play local videos, stream from URLs, and enjoy auto-subtitle support with a minimal interface.
+                    Relax, create, and have fun! A creative coloring game for all ages with hundreds of beautiful pages and a child-safe environment.
                 </p>
+
                 <div class="app-features">
-                    <h4>🎬 Key Features:</h4>
+                    <h4>Key Features</h4>
                     <ul>
-                        <li>Play local video files (MP4, MKV, AVI, M3U8, DASH)</li>
-                        <li>Stream videos from URLs</li>
-                        <li>Auto-search and download subtitles</li>
-                        <li>Create playlists and resume playback</li>
-                        <li>Multi-platform: Android, iOS, iPad, macOS</li>
-                        <li>Simple. Fast. Minimal.</li>
+                        <li><span class="feat-dot dot-pink"></span>Hundreds of pages: animals, mandalas, nature</li>
+                        <li><span class="feat-dot dot-pink"></span>Easy tap-to-fill and brush tools</li>
+                        <li><span class="feat-dot dot-pink"></span>Child-safe: COPPA compliant</li>
+                        <li><span class="feat-dot dot-pink"></span>Works offline, no account required</li>
+                        <li><span class="feat-dot dot-pink"></span>Free to play, optional purchases</li>
+                    </ul>
+                </div>
+
+                <div class="app-links">
+                    <a href="coloring/index.html" class="app-link btn-primary">📖 Details</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.free.colorpaint.pro" class="app-link btn-store">📱 Google Play</a>
+                    <a href="https://apps.apple.com/app/coloring-paint-pro/id6749254413" class="app-link btn-store">🍎 App Store</a>
+                </div>
+            </div>
+
+            <!-- QPlay -->
+            <div class="app-card reveal" data-glow="green" data-href="qplay/index.html">
+                <div class="card-header">
+                    <div class="app-icon-wrap">
+                        <img src="qplay/ic_launcher.png" alt="QPlay Icon" class="app-icon">
+                    </div>
+                    <div class="card-title-block">
+                        <h2 class="app-title">QPlay</h2>
+                        <div class="app-tags">
+                            <span class="tag tag-green">Media</span>
+                            <span class="tag tag-blue">Multi-platform</span>
+                            <span class="tag tag-new">✦ NEW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-divider"></div>
+
+                <p class="app-description">
+                    A clean, minimal video player. Play local files, stream from URLs, and enjoy auto-subtitle support — nothing more, nothing less.
+                </p>
+
+                <div class="app-features">
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li><span class="feat-dot dot-green"></span>Local files: MP4, MKV, AVI, M3U8, DASH</li>
+                        <li><span class="feat-dot dot-green"></span>Stream videos from URLs</li>
+                        <li><span class="feat-dot dot-green"></span>Auto-search and download subtitles</li>
+                        <li><span class="feat-dot dot-green"></span>Playlists and resume playback</li>
+                        <li><span class="feat-dot dot-green"></span>Android, iOS, iPad, macOS</li>
                     </ul>
                 </div>
                 <div class="app-links">
-                    <a href="qplay/index.html" class="app-link details">📖 Details</a>
-                    <a href="#" class="app-link">📱 Google Play</a>
-                    <a href="#" class="app-link">🍎 App Store</a>
+                    <a href="qplay/index.html" class="app-link btn-primary">📖 Details</a>
+                    <a href="#" class="app-link btn-store">📱 Google Play</a>
+                    <a href="#" class="app-link btn-store">🍎 App Store</a>
                 </div>
             </div>
-        </section>
+
+            <!-- Family Store -->
+            <div class="app-card reveal" data-glow="green" data-href="familystore/index.html">
+                <div class="card-header">
+                    <div class="app-icon-wrap">
+                        <img src="familystore/ic_launcher.png" alt="Family Store Icon" class="app-icon">
+                    </div>
+                    <div class="card-title-block">
+                        <h2 class="app-title">Quản Lý Tạp Hóa</h2>
+                        <div class="app-tags">
+                            <span class="tag tag-green">Business</span>
+                            <span class="tag tag-orange">Vietnam</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-divider"></div>
+
+                <p class="app-description">
+                    Ứng dụng quản lý tiệm tạp hóa gọn nhẹ, dễ dùng, không cần internet — bán hàng, quét mã vạch, QR thanh toán và thống kê doanh thu.
+                </p>
+
+                <div class="app-features">
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li><span class="feat-dot dot-green"></span>Bán hàng nhanh — chọn, giỏ, thanh toán</li>
+                        <li><span class="feat-dot dot-green"></span>Quét barcode bằng camera</li>
+                        <li><span class="feat-dot dot-green"></span>QR chuyển khoản VietQR / MoMo / ZaloPay</li>
+                        <li><span class="feat-dot dot-green"></span>Thống kê doanh thu theo ngày</li>
+                        <li><span class="feat-dot dot-green"></span>Offline 100% — không đăng nhập</li>
+                    </ul>
+                </div>
+
+                <div class="app-links">
+                    <a href="familystore/index.html" class="app-link btn-primary">📖 Details</a>
+                    <a href="#" class="app-link btn-store">📱 Google Play</a>
+                </div>
+            </div>
+
+            <!-- Fitness Hub -->
+            <div class="app-card reveal" data-glow="purple" data-href="fitness/index.html">
+                <div class="card-header">
+                    <div class="app-icon-wrap">
+                        <img src="fitness/ic_launcher.png" alt="Fitness Hub Icon" class="app-icon">
+                    </div>
+                    <div class="card-title-block">
+                        <h2 class="app-title">Fitness Hub</h2>
+                        <div class="app-tags">
+                            <span class="tag tag-purple">Health</span>
+                            <span class="tag tag-green">Tracking</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-divider"></div>
+
+                <p class="app-description">
+                    Workout tracker and step counter — log exercises, track progress, and stay motivated with smart daily goals.
+                </p>
+
+                <div class="app-features">
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li><span class="feat-dot dot-purple"></span>Workout logging and exercise library</li>
+                        <li><span class="feat-dot dot-purple"></span>Step counter and daily goal tracking</li>
+                        <li><span class="feat-dot dot-purple"></span>Progress charts and statistics</li>
+                        <li><span class="feat-dot dot-purple"></span>Custom workout plans</li>
+                        <li><span class="feat-dot dot-purple"></span>Works offline, no account required</li>
+                    </ul>
+                </div>
+
+                <div class="app-links">
+                    <a href="fitness/index.html" class="app-link btn-primary">📖 Details</a>
+                    <a href="#" class="app-link btn-store">📱 Google Play</a>
+                    <a href="#" class="app-link btn-store">🍎 App Store</a>
+                </div>
+            </div>
+
+            <!-- QuickMind -->
+            <div class="app-card reveal" data-glow="blue" data-href="quickmind/index.html">
+                <div class="card-header">
+                    <div class="app-icon-wrap">
+                        <img src="quickmind/ic_launcher.png" alt="QuickMind Icon" class="app-icon">
+                    </div>
+                    <div class="card-title-block">
+                        <h2 class="app-title">QuickMind</h2>
+                        <div class="app-tags">
+                            <span class="tag tag-blue">Productivity</span>
+                            <span class="tag tag-purple">Privacy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-divider"></div>
+
+                <p class="app-description">
+                    Smart note-taking with AES-256 encryption. Capture thoughts, organize ideas, and keep private notes fully secure.
+                </p>
+
+                <div class="app-features">
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li><span class="feat-dot dot-blue"></span>Rich text editor with Markdown support</li>
+                        <li><span class="feat-dot dot-blue"></span>Folders, tags, and quick search</li>
+                        <li><span class="feat-dot dot-blue"></span>AES-256 password-protected notes</li>
+                        <li><span class="feat-dot dot-blue"></span>Local storage — 100% private</li>
+                        <li><span class="feat-dot dot-blue"></span>Auto-save and pin important notes</li>
+                    </ul>
+                </div>
+
+                <div class="app-links">
+                    <a href="quickmind/index.html" class="app-link btn-primary">📖 Details</a>
+                    <a href="#" class="app-link btn-store">📱 Google Play</a>
+                </div>
+            </div>
+
+            <!-- Pulse Remote -->
+            <div class="app-card reveal" data-glow="blue" data-href="remote/index.html">
+                <div class="card-header">
+                    <div class="app-icon-wrap">
+                        <img src="remote/ic_launcher.png" alt="Pulse Remote Icon" class="app-icon">
+                    </div>
+                    <div class="card-title-block">
+                        <h2 class="app-title">Pulse Remote</h2>
+                        <div class="app-tags">
+                            <span class="tag tag-blue">Smart TV</span>
+                            <span class="tag tag-purple">Control</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-divider"></div>
+
+                <p class="app-description">
+                    Control your Smart TV from your phone via Wi-Fi, Bluetooth, or voice — navigate, launch apps, and manage multiple devices.
+                </p>
+
+                <div class="app-features">
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li><span class="feat-dot dot-blue"></span>Android TV, Sony, Samsung support</li>
+                        <li><span class="feat-dot dot-blue"></span>Wi-Fi &amp; Bluetooth modes</li>
+                        <li><span class="feat-dot dot-blue"></span>Voice commands via Google Assistant</li>
+                        <li><span class="feat-dot dot-blue"></span>D-Pad and touchpad navigation</li>
+                        <li><span class="feat-dot dot-blue"></span>Multi-device manager, no account needed</li>
+                    </ul>
+                </div>
+
+                <div class="app-links">
+                    <a href="remote/index.html" class="app-link btn-primary">📖 Details</a>
+                    <a href="#" class="app-link btn-store">📱 Google Play</a>
+                    <a href="#" class="app-link btn-store">🍎 App Store</a>
+                </div>
+            </div>
+        </div>
 
         <!-- Footer -->
-        <footer class="footer">
-            <h3>📞 Contact & Support</h3>
-            <p>We're always ready to help and listen to user feedback</p>
-            
+        <footer class="footer reveal">
+            <p class="footer-title">Contact & Support 👋</p>
+            <p class="footer-sub">Always ready to help and listen to user feedback</p>
+
             <div class="contact-info">
                 <div class="contact-item">
                     <span>📧</span>
@@ -372,14 +994,45 @@
                 </div>
                 <div class="contact-item">
                     <span>📍</span>
-                    <span>Location: Metropolis (Vietnam) 🌍</span>
+                    <span>Metropolis (Vietnam) 🌍</span>
                 </div>
             </div>
-            
-            <p style="margin-top: 30px; opacity: 0.7; font-size: 0.9rem;">
-                © 2025 ProStores. All applications developed with super powers from Vietnam 🇻🇳💪
-            </p>
+
+            <p class="footer-copy">© 2025 ProStores · Built with super powers from Vietnam 🇻🇳</p>
         </footer>
     </div>
+
+    <script>
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Subtle tilt + click navigation on cards
+        document.querySelectorAll('.app-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                card.style.transform = `translateY(-8px) rotateX(${-y * 5}deg) rotateY(${x * 5}deg) scale(1.01)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+            // Click card body → navigate to details (skip if clicking an <a> button)
+            card.addEventListener('click', e => {
+                if (!e.target.closest('a') && card.dataset.href) {
+                    window.location.href = card.dataset.href;
+                }
+            });
+        });
+    </script>
 </body>
 </html>
