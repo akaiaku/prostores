@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — English Learning Assistant</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #1e1e2e;
+      color: #cdd6f4;
+      line-height: 1.7;
+      padding: 48px 24px 80px;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #cba6f7;
+      margin-bottom: 8px;
+    }
+
+    .meta {
+      font-size: 13px;
+      color: #6c7086;
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-size: 17px;
+      font-weight: 600;
+      color: #89b4fa;
+      margin-top: 36px;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #313244;
+    }
+
+    p {
+      font-size: 14px;
+      color: #cdd6f4;
+      margin-bottom: 12px;
+    }
+
+    ul {
+      margin: 8px 0 12px 20px;
+      font-size: 14px;
+      color: #cdd6f4;
+    }
+
+    ul li { margin-bottom: 6px; }
+
+    a {
+      color: #89b4fa;
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
+
+    .highlight-box {
+      background: #181825;
+      border: 1px solid #313244;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #a6e3a1;
+      color: #1e1e2e;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 4px;
+      padding: 2px 7px;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    footer {
+      margin-top: 60px;
+      font-size: 12px;
+      color: #45475a;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <h1>Privacy Policy</h1>
+    <p class="meta">English Learning Assistant &nbsp;·&nbsp; Last updated: April 8, 2026</p>
+
+    <div class="highlight-box">
+      <span class="tag">TL;DR</span>
+      This extension does <strong>not</strong> collect, store, or share any personal data.
+      Your vocabulary list lives entirely on your own device.
+    </div>
+
+    <h2>1. Information We Collect</h2>
+    <p>
+      English Learning Assistant does <strong>not</strong> collect any personally identifiable
+      information. The extension does not require an account, login, or registration.
+    </p>
+    <p>The only data stored by this extension is:</p>
+    <ul>
+      <li>Your saved vocabulary words (word text, definition, phonetic, audio URL, SRS level, review dates)</li>
+      <li>Your selected translation language preference</li>
+      <li>A one-time flag indicating whether the onboarding screen has been seen</li>
+    </ul>
+    <p>
+      All of the above is stored locally on your device using
+      <code>chrome.storage.local</code> and never leaves your browser.
+    </p>
+
+    <h2>2. External API Calls</h2>
+    <p>
+      To provide its core features, the extension makes requests to two third-party APIs
+      <strong>only when you highlight a word</strong>:
+    </p>
+    <ul>
+      <li>
+        <strong>Free Dictionary API</strong>
+        (<a href="https://api.dictionaryapi.dev" target="_blank" rel="noopener">api.dictionaryapi.dev</a>) —
+        The highlighted word is sent as a URL path parameter to retrieve its definition,
+        phonetic transcription, and audio pronunciation URL.
+      </li>
+      <li>
+        <strong>MyMemory Translation API</strong>
+        (<a href="https://api.mymemory.translated.net" target="_blank" rel="noopener">api.mymemory.translated.net</a>) —
+        The highlighted word and your chosen target language code are sent as query
+        parameters to retrieve a translation.
+      </li>
+    </ul>
+    <p>
+      Only the word being looked up is transmitted. No page content, browsing history,
+      user identity, or device information is included in these requests. Please review
+      the respective privacy policies of these services for how they handle API requests.
+    </p>
+
+    <h2>3. Data Sharing</h2>
+    <p>
+      We do not sell, trade, rent, or otherwise share any user data with third parties.
+      No analytics, advertising, or tracking services are used.
+    </p>
+
+    <h2>4. Data Security</h2>
+    <p>
+      All vocabulary data is stored locally using Chrome's built-in
+      <code>chrome.storage.local</code> API, which is sandboxed to this extension.
+      No external servers store your vocabulary list.
+    </p>
+
+    <h2>5. Children's Privacy</h2>
+    <p>
+      This extension does not knowingly collect any information from children under 13.
+      It contains no age-gating features as no personal data is collected from any user.
+    </p>
+
+    <h2>6. Changes to This Policy</h2>
+    <p>
+      If this privacy policy is updated, the new version will be published at this URL
+      and the "Last updated" date at the top will be revised. Continued use of the
+      extension after changes constitutes acceptance of the updated policy.
+    </p>
+
+    <h2>7. Contact</h2>
+    <p>
+      If you have any questions about this privacy policy, please contact:
+      <a href="mailto:linhhvtt@gmail.com">linhhvtt@gmail.com</a>
+    </p>
+
+    <footer>
+      &copy; 2026 English Learning Assistant &nbsp;·&nbsp;
+      <a href="https://www.paypal.me/linhhvtt/5">Support the developer ☕</a>
+    </footer>
+
+  </div>
+</body>
+</html>
