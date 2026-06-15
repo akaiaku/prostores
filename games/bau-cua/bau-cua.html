@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bầu Cua Tôm Cá</title>
+<style>
+  :root{
+    --do:#8a1320; --do-dam:#5e0c16; --vang:#e6b54a; --vang-sang:#f4d27a;
+    --kem:#f5ead2; --ngoc:#2f7d5b; --than:#23140f; --shadow:rgba(40,8,12,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:"Segoe UI",system-ui,sans-serif;
+    background:radial-gradient(circle at 50% -10%, #a3202f 0%, var(--do) 38%, var(--do-dam) 100%);
+    color:var(--kem);min-height:100vh;padding:18px 14px 60px;display:flex;justify-content:center;
+  }
+  .wrap{width:100%;max-width:760px;}
+  header{text-align:center;margin-bottom:14px;}
+  h1{font-family:"Times New Roman",Georgia,serif;font-size:clamp(30px,7vw,46px);letter-spacing:.06em;
+     color:var(--vang-sang);text-shadow:0 2px 0 var(--do-dam),0 4px 10px var(--shadow);font-weight:700;}
+  h1 small{display:block;font-size:.3em;letter-spacing:.5em;color:var(--vang);text-transform:uppercase;margin-top:6px;font-family:system-ui;}
+  .topbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px;}
+  .pill{background:rgba(0,0,0,.22);border:1px solid var(--vang);border-radius:999px;padding:7px 16px;font-size:14px;display:flex;gap:8px;align-items:baseline;}
+  .pill b{color:var(--vang-sang);font-size:17px;font-variant-numeric:tabular-nums;}
+
+  .dice-tray{background:var(--ngoc);background-image:radial-gradient(circle at 30% 20%, #3a946c, var(--ngoc) 70%);
+    border:3px solid var(--vang);border-radius:18px;padding:22px;margin:16px 0;display:flex;justify-content:center;gap:18px;
+    box-shadow:inset 0 0 30px rgba(0,0,0,.3),0 6px 16px var(--shadow);}
+  .die{width:clamp(72px,22vw,96px);height:clamp(72px,22vw,96px);background:var(--kem);border-radius:16px;
+    display:flex;align-items:center;justify-content:center;font-size:clamp(40px,12vw,56px);
+    box-shadow:0 5px 0 #cdbf9a,0 8px 14px var(--shadow);transition:transform .08s;}
+  .die.rolling{animation:shake .12s linear infinite;}
+  @keyframes shake{0%{transform:translateY(0) rotate(0)}25%{transform:translateY(-6px) rotate(-8deg)}75%{transform:translateY(4px) rotate(8deg)}100%{transform:translateY(0) rotate(0)}}
+
+  /* ---- khu người chơi ---- */
+  .players-box{background:rgba(0,0,0,.2);border:1px solid var(--vang);border-radius:14px;padding:12px 14px;margin-bottom:14px;}
+  .players-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+  .players-head span{font-weight:700;color:var(--vang-sang);}
+  .roster{display:flex;flex-wrap:wrap;gap:8px;min-height:36px;align-items:center;}
+  .roster .empty{color:rgba(245,234,210,.6);font-size:13px;}
+  .player{display:inline-flex;align-items:center;gap:6px;background:var(--kem);color:var(--than);
+    border:2px solid transparent;border-radius:999px;padding:6px 12px;font-weight:600;font-size:14px;cursor:pointer;transition:transform .08s,border-color .1s;}
+  .player:hover{transform:translateY(-2px);}
+  .player.sel{border-color:var(--ngoc);background:var(--vang-sang);box-shadow:0 0 0 3px rgba(47,125,91,.4);}
+  .player .x{cursor:pointer;font-weight:800;color:var(--do);opacity:.7;}
+  .player .x:hover{opacity:1;}
+
+  .controls{display:flex;flex-direction:column;gap:12px;align-items:center;margin-bottom:14px;margin-top:14px;}
+  .btn-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+  button.act{font-size:16px;font-weight:700;padding:12px 26px;border-radius:12px;cursor:pointer;
+    border:2px solid var(--vang);background:var(--than);color:var(--vang-sang);box-shadow:0 4px 0 #000;transition:transform .08s;}
+  button.act:active{transform:translateY(3px);box-shadow:0 1px 0 #000;}
+  button.act.primary{background:var(--vang);color:var(--do-dam);border-color:var(--vang-sang);box-shadow:0 4px 0 #8a6a18;}
+  button.act.sm{font-size:13px;padding:7px 14px;box-shadow:0 3px 0 #000;}
+  button.act:disabled{opacity:.5;cursor:not-allowed;}
+
+  .board{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  @media(max-width:520px){.board{grid-template-columns:repeat(2,1fr);}}
+  .cell{background:var(--kem);border-radius:16px;border:3px solid transparent;padding:14px 8px 10px;text-align:center;
+    cursor:pointer;position:relative;box-shadow:0 5px 12px var(--shadow);transition:transform .1s,border-color .1s;user-select:none;}
+  .cell:hover{transform:translateY(-3px);}
+  .cell.win{border-color:var(--vang);animation:glow 1s ease;}
+  @keyframes glow{0%,100%{box-shadow:0 5px 12px var(--shadow);}50%{box-shadow:0 0 26px var(--vang);}}
+  .cell .emo{font-size:clamp(40px,11vw,54px);line-height:1;}
+  .cell .nm{font-family:"Times New Roman",serif;font-size:20px;color:var(--do-dam);font-weight:700;margin-top:4px;}
+  .cell .multi{position:absolute;top:8px;right:10px;font-weight:800;color:var(--ngoc);font-size:15px;display:none;}
+  .cell.win .multi{display:block;}
+  .bettors{margin-top:8px;display:flex;flex-wrap:wrap;gap:5px;justify-content:center;min-height:24px;}
+  .tag{display:inline-flex;align-items:center;gap:4px;background:var(--ngoc);color:#fff;border-radius:999px;padding:3px 8px;font-size:12px;font-weight:600;line-height:1;}
+  .tag.won{background:var(--vang);color:var(--do-dam);}
+  .tag .x{cursor:pointer;font-weight:800;opacity:.8;}
+  .tag .x:hover{opacity:1;}
+  .empty-hint{font-size:12px;color:#b6a37a;}
+
+  #msg{text-align:center;margin:16px 0;min-height:26px;font-size:16px;font-weight:600;color:var(--vang-sang);}
+  #msg.warn{color:#ffb3a0;}
+
+  /* ---- modal ---- */
+  .overlay{position:fixed;inset:0;background:rgba(20,4,8,.7);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;}
+  .overlay.show{display:flex;}
+  .modal{background:var(--kem);color:var(--than);border-radius:18px;border:3px solid var(--vang);padding:26px 24px;width:100%;max-width:360px;box-shadow:0 14px 40px rgba(0,0,0,.5);}
+  .modal h3{font-family:"Times New Roman",serif;color:var(--do-dam);font-size:24px;margin-bottom:14px;text-align:center;}
+  .modal input{width:100%;font-size:16px;padding:12px 14px;border-radius:12px;border:2px solid var(--ngoc);background:#fff;color:var(--than);margin-bottom:16px;}
+  .modal input:focus{outline:3px solid var(--vang);}
+  .modal .row{display:flex;gap:10px;}
+  .modal .row button{flex:1;}
+  .modal button.ghost{background:#fff;color:var(--than);border-color:#bbb;box-shadow:0 4px 0 #ccc;}
+
+  details{margin-top:24px;background:rgba(0,0,0,.2);border:1px solid var(--vang);border-radius:14px;padding:4px 16px;}
+  summary{cursor:pointer;font-weight:700;color:var(--vang-sang);padding:10px 0;font-size:16px;}
+  .seq-tools{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px;}
+  .seq-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+  @media(max-width:520px){.seq-grid{grid-template-columns:1fr;}}
+  .seq-row{display:flex;align-items:center;gap:6px;background:rgba(245,234,210,.08);border:1px solid rgba(230,181,74,.4);border-radius:10px;padding:6px 8px;}
+  .seq-row.active{border-color:var(--vang-sang);background:rgba(230,181,74,.18);}
+  .seq-row .idx{width:26px;font-weight:700;color:var(--vang);text-align:right;font-size:13px;}
+  .seq-row select{flex:1;background:var(--kem);color:var(--than);border:none;border-radius:6px;padding:5px;font-size:14px;cursor:pointer;}
+  .hint{font-size:13px;color:rgba(245,234,210,.7);margin:4px 0 12px;line-height:1.5;}
+
+  .hist-list{display:flex;flex-direction:column;gap:8px;max-height:320px;overflow:auto;padding-bottom:6px;}
+  .hist-empty{color:rgba(245,234,210,.6);font-size:13px;padding:4px 0 10px;}
+  .hist-row{background:rgba(245,234,210,.08);border:1px solid rgba(230,181,74,.35);border-radius:10px;padding:8px 12px;}
+  .hist-top{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+  .hist-top b{color:var(--vang-sang);font-size:14px;}
+  .hist-dice{font-size:20px;letter-spacing:2px;}
+  .hist-win{margin-top:4px;font-size:13px;color:var(--vang-sang);}
+  .hist-win.no{color:rgba(245,234,210,.6);}
+  .hist-lose{margin-top:2px;font-size:13px;color:#ffb3a0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Bầu Cua Tôm Cá<small>Đặt cược theo người chơi</small></h1>
+    <div class="topbar">
+      <div class="pill">Người chơi <b id="countPlayer">0</b></div>
+      <div class="pill">Lượt cược <b id="betRound">1</b></div>
+    
+    </div>
+  </header>
+
+  <div class="dice-tray" id="tray">
+    <div class="die" id="d0">❔</div>
+    <div class="die" id="d1">❔</div>
+    <div class="die" id="d2">❔</div>
+  </div>
+
+  <div class="players-box">
+    <div class="players-head">
+      <span>Người chơi</span>
+      <button class="act sm" id="addBtn">+ Thêm người chơi</button>
+    </div>
+    <div class="roster" id="roster"></div>
+  </div>
+
+  <div id="msg">Thêm người chơi → bấm chọn 1 người → bấm vào con vật để đặt cược → LẮC</div>
+
+  <div class="board" id="board"></div>
+
+  <div class="controls">
+    <div class="btn-row">
+      <button class="act" id="clearBtn">Xóa hết cược</button>
+      <button class="act primary" id="rollBtn">LẮC</button>
+    </div>
+  </div>
+
+  <details id="historyBox" open>
+    <summary>📜 Lịch sử ván cược (<span id="histCount">0</span>)</summary>
+    <div class="seq-tools"><button class="act sm" id="clearHist">Xóa lịch sử</button></div>
+    <div id="histList" class="hist-list"></div>
+  </details>
+
+  <details id="settings" style="display:none">
+    <summary>⚙️ Chỉnh 16 kết quả</summary>
+    <p class="hint">Mỗi lần lắc ra đúng kết quả theo dãy này. Lần lắc đầu chọn ngẫu nhiên một vị trí, sau đó nhảy lần lượt. Thay đổi được lưu lại cho lần sau.</p>
+    <div class="seq-tools">
+      <button class="act sm" id="randSeq">Ngẫu nhiên hóa</button>
+      <button class="act sm" id="resetTurn">Bắt đầu lại</button>
+    </div>
+    <div class="seq-grid" id="seqGrid"></div>
+  </details>
+</div>
+
+<!-- modal thêm người chơi -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <h3>Thêm người chơi</h3>
+    <input id="modalInput" type="text" placeholder="Nhập tên…" autocomplete="off">
+    <div class="row">
+      <button class="act ghost" id="modalCancel">Hủy</button>
+      <button class="act primary" id="modalOk">Thêm</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SYMBOLS = [
+  { name:'Bầu', emoji:'🍐' },
+  { name:'Cua', emoji:'🦀' },
+  { name:'Tôm', emoji:'🦐' },
+  { name:'Cá',  emoji:'🐟' },
+  { name:'Gà',  emoji:'🐓' },
+  { name:'Nai', emoji:'🦌' },
+];
+
+let SEQUENCE = [
+  [0,1,2],[3,4,5],[0,0,1],[2,3,4],
+  [5,5,5],[1,2,3],[4,0,2],[3,3,1],
+  [0,4,5],[2,2,2],[1,5,3],[4,4,0],
+  [5,1,2],[3,0,4],[1,1,5],[2,4,3],
+];
+
+const STORE_KEY = 'baucua_sequence_v1';
+const HIST_KEY  = 'baucua_history_v1';
+function saveSequence(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(SEQUENCE)); }catch(e){}
+}
+function loadSequence(){
+  try{
+    const s=localStorage.getItem(STORE_KEY);
+    if(s){
+      const arr=JSON.parse(s);
+      if(Array.isArray(arr)&&arr.length===16 && arr.every(r=>Array.isArray(r)&&r.length===3)){
+        SEQUENCE=arr.map(r=>r.map(v=>Math.max(0,Math.min(5,+v||0))));
+      }
+    }
+  }catch(e){}
+}
+
+let players = [];                 // danh sách tên người chơi
+let selected = null;              // tên đang được chọn để đặt cược
+let bettors = [[],[],[],[],[],[]]; // bettors[i] = tên người cược con thứ i
+let seqIndex = null;              // chỉ số kết quả vừa ra trong SEQUENCE
+let betRound = 1;                 // lượt cược hiện tại (tăng mỗi lần lắc)
+let firstRoll = true;             // lần lắc đầu tiên -> random index
+let rolling = false;
+
+const $ = id => document.getElementById(id);
+const escapeHtml = s => s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- bàn cược ---------- */
+const board = $('board');
+SYMBOLS.forEach((s,i)=>{
+  const c=document.createElement('div');
+  c.className='cell'; c.dataset.i=i;
+  c.innerHTML=`<div class="multi"></div><div class="emo">${s.emoji}</div><div class="nm">${s.name}</div><div class="bettors" id="bt${i}"></div>`;
+  c.addEventListener('click',()=>placeBet(i));
+  board.appendChild(c);
+});
+
+/* ---------- modal thêm người chơi ---------- */
+$('addBtn').addEventListener('click', openModal);
+$('modalCancel').addEventListener('click', closeModal);
+$('modalOk').addEventListener('click', confirmAdd);
+$('overlay').addEventListener('click', e=>{ if(e.target.id==='overlay') closeModal(); });
+$('modalInput').addEventListener('keydown', e=>{
+  if(e.key==='Enter') confirmAdd();
+  if(e.key==='Escape') closeModal();
+});
+function openModal(){ $('overlay').classList.add('show'); $('modalInput').value=''; setTimeout(()=>$('modalInput').focus(),50); }
+function closeModal(){ $('overlay').classList.remove('show'); }
+function confirmAdd(){
+  const name=$('modalInput').value.trim();
+  if(!name){ $('modalInput').focus(); return; }
+  if(players.some(p=>p.toLowerCase()===name.toLowerCase())){
+    flash(`"${name}" đã có trong danh sách.`, true); return;
+  }
+  players.push(name);
+  selected=name;            // tự chọn người vừa thêm
+  renderRoster();
+  closeModal();
+  flash(`Đã thêm "${name}". Bấm vào con vật để đặt cược.`, false);
+}
+
+/* ---------- danh sách người chơi ---------- */
+function renderRoster(){
+  const r=$('roster');
+  if(players.length===0){ r.innerHTML='<span class="empty">Chưa có người chơi. Bấm "+ Thêm người chơi".</span>'; }
+  else{
+    r.innerHTML=players.map(p=>
+      `<span class="player ${p===selected?'sel':''}" data-n="${escapeHtml(p)}">${escapeHtml(p)}<span class="x" data-del="${escapeHtml(p)}">×</span></span>`
+    ).join('');
+  }
+  document.querySelectorAll('.player').forEach(el=>{
+    el.addEventListener('click', e=>{
+      if(e.target.dataset.del!==undefined) return;
+      selected = el.dataset.n;
+      renderRoster();
+    });
+  });
+  document.querySelectorAll('.player .x').forEach(x=>{
+    x.addEventListener('click', e=>{ e.stopPropagation(); removePlayer(x.dataset.del); });
+  });
+  $('countPlayer').textContent=players.length;
+}
+function removePlayer(name){
+  if(rolling) return;
+  players=players.filter(p=>p!==name);
+  bettors=bettors.map(list=>list.filter(n=>n!==name));  // gỡ luôn cược của người đó
+  if(selected===name) selected=null;
+  renderRoster(); renderBettors();
+}
+
+/* ---------- đặt cược ---------- */
+function placeBet(i){
+  if(rolling) return;
+  if(players.length===0){ flash('Hãy thêm người chơi trước!', true); openModal(); return; }
+  if(!selected){ flash('Hãy bấm chọn một người chơi trong danh sách.', true); return; }
+  if(bettors[i].includes(selected)){
+    // bấm lần nữa để bỏ cược con đó
+    bettors[i]=bettors[i].filter(n=>n!==selected);
+    renderBettors();
+    flash(`Đã bỏ "${selected}" khỏi ${SYMBOLS[i].name}.`, false);
+    return;
+  }
+  bettors[i].push(selected);
+  renderBettors();
+  flash(`"${selected}" cược ${SYMBOLS[i].name}.`, false);
+}
+
+function totalBet(){ return bettors.reduce((a,b)=>a+b.length,0); }
+
+function renderBettors(){
+  bettors.forEach((list,i)=>{
+    const el=$('bt'+i);
+    el.innerHTML = list.length===0
+      ? '<span class="empty-hint">— trống —</span>'
+      : list.map(n=>`<span class="tag">${escapeHtml(n)}</span>`).join('');
+  });
+}
+
+$('clearBtn').addEventListener('click', ()=>{
+  if(rolling) return;
+  bettors=[[],[],[],[],[],[]]; renderBettors();
+  document.querySelectorAll('.cell').forEach(c=>c.classList.remove('win'));
+  flash('Đã xóa hết cược.', false);
+});
+
+/* ---------- lắc ---------- */
+$('rollBtn').addEventListener('click', roll);
+function roll(){
+  if(rolling) return;
+  if(totalBet()===0){ flash('Chưa có ai đặt cược!', true); return; }
+  rolling=true;
+  document.querySelectorAll('.cell').forEach(c=>c.classList.remove('win'));
+  const dice=[$('d0'),$('d1'),$('d2')];
+  dice.forEach(d=>d.classList.add('rolling'));
+
+  // lần lắc đầu: random vị trí trong dãy 16; các lần sau: nhảy sang kế tiếp
+  if(firstRoll){ seqIndex = Math.floor(Math.random()*SEQUENCE.length); firstRoll=false; }
+  else { seqIndex = (seqIndex+1) % SEQUENCE.length; }
+  const result=SEQUENCE[seqIndex];
+
+  const spin=setInterval(()=>{dice.forEach(d=>d.textContent=SYMBOLS[Math.floor(Math.random()*6)].emoji);},90);
+  setTimeout(()=>{
+    clearInterval(spin);
+    dice.forEach((d,k)=>{d.classList.remove('rolling');d.textContent=SYMBOLS[result[k]].emoji;});
+    settle(result);
+    $('seqNow').textContent=seqIndex+1;     // kết quả thứ mấy trong 16
+    highlightSeq();
+    betRound++;                             // lượt cược tăng sau mỗi lần lắc
+    $('betRound').textContent=betRound;
+    rolling=false;
+  },1100);
+}
+function settle(result){
+  const count=[0,0,0,0,0,0]; result.forEach(r=>count[r]++);
+  const winners=[], losers=[];
+  for(let i=0;i<6;i++){
+    if(count[i]>0){
+      const cell=board.children[i];
+      cell.classList.add('win');
+      cell.querySelector('.multi').textContent='×'+count[i];
+      cell.querySelectorAll('.tag').forEach(t=>t.classList.add('won'));
+      bettors[i].forEach(n=>winners.push(`${n} (${SYMBOLS[i].name}×${count[i]})`));
+    } else {
+      bettors[i].forEach(n=>losers.push(`${n} (${SYMBOLS[i].name})`));
+    }
+  }
+  const names=result.map(r=>SYMBOLS[r].name).join(' · ');
+  flash(winners.length?`Ra: ${names} → Thắng: ${winners.join(', ')}`:`Ra: ${names} → Không ai trúng.`, winners.length===0);
+
+  // ghi vào lịch sử (mới nhất lên đầu, giữ tối đa 100 ván)
+  history.unshift({ round: betRound, result: result.slice(), winners: winners.slice(), losers: losers.slice() });
+  if(history.length>100) history.length=100;
+  saveHistory(); renderHistory();
+}
+
+/* ---------- 16 kết quả ---------- */
+const seqGrid=$('seqGrid');
+function buildSeqEditor(){
+  seqGrid.innerHTML='';
+  SEQUENCE.forEach((row,i)=>{
+    const div=document.createElement('div'); div.className='seq-row'; div.dataset.i=i;
+    div.innerHTML=`<span class="idx">${i+1}.</span>`;
+    row.forEach((val,k)=>{
+      const sel=document.createElement('select');
+      SYMBOLS.forEach((s,si)=>{const o=document.createElement('option');o.value=si;o.textContent=`${s.emoji} ${s.name}`;if(si===val)o.selected=true;sel.appendChild(o);});
+      sel.addEventListener('change',()=>{SEQUENCE[i][k]=+sel.value; saveSequence();});
+      div.appendChild(sel);
+    });
+    seqGrid.appendChild(div);
+  });
+  highlightSeq();
+}
+function highlightSeq(){document.querySelectorAll('.seq-row').forEach(r=>r.classList.toggle('active',seqIndex!==null && +r.dataset.i===seqIndex));}
+$('randSeq').addEventListener('click',()=>{SEQUENCE=SEQUENCE.map(()=>[0,0,0].map(()=>Math.floor(Math.random()*6)));saveSequence();buildSeqEditor();});
+$('resetTurn').addEventListener('click',()=>{
+  firstRoll=true; seqIndex=null; betRound=1;
+  $('betRound').textContent=1; $('seqNow').textContent='–';
+  highlightSeq();
+  flash('Đã bắt đầu lại. Lần lắc tới sẽ chọn ngẫu nhiên trong 16 kết quả.',false);
+});
+
+function flash(t,w){const m=$('msg');m.textContent=t;m.classList.toggle('warn',!!w);}
+
+/* ---------- lịch sử ván cược ---------- */
+let history = [];
+function saveHistory(){ try{ localStorage.setItem(HIST_KEY, JSON.stringify(history)); }catch(e){} }
+function loadHistory(){
+  try{ const s=localStorage.getItem(HIST_KEY); if(s){ const a=JSON.parse(s); if(Array.isArray(a)) history=a; } }catch(e){}
+}
+function renderHistory(){
+  $('histCount').textContent=history.length;
+  const el=$('histList');
+  if(!history.length){ el.innerHTML='<div class="hist-empty">Chưa có ván nào.</div>'; return; }
+  el.innerHTML = history.map(h=>{
+    const dice = h.result.map(r=>SYMBOLS[r].emoji).join(' ');
+    const losers = h.losers || [];
+    const winLine = `<div class="hist-win ${h.winners.length?'':'no'}">${h.winners.length?'Thắng: '+escapeHtml(h.winners.join(', ')):'Không ai trúng'}</div>`;
+    const loseLine = losers.length ? `<div class="hist-lose">Thua: ${escapeHtml(losers.join(', '))}</div>` : '';
+    return `<div class="hist-row">
+      <div class="hist-top"><b>Lượt ${h.round}</b><span class="hist-dice">${dice}</span></div>
+      ${winLine}${loseLine}</div>`;
+  }).join('');
+}
+$('clearHist').addEventListener('click', ()=>{
+  history=[]; saveHistory(); renderHistory(); flash('Đã xóa lịch sử.', false);
+});
+
+/* ---------- cổng #hack: chỉ hiện chỉnh kết quả khi URL có #hack ---------- */
+function applyHackGate(){
+  const on = location.hash.toLowerCase().includes('hack');
+  $('settings').style.display = on ? '' : 'none';
+}
+window.addEventListener('hashchange', applyHackGate);
+
+/* ---------- init ---------- */
+loadSequence();
+loadHistory();
+applyHackGate();
+renderRoster(); renderBettors(); buildSeqEditor(); renderHistory();
+</script>
+</body>
+</html>
