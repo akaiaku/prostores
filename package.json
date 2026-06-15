@@ -1,0 +1,11 @@
+{
+  "name": "prostores",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "obfuscate": "node build-obfuscate.js"
+  },
+  "devDependencies": {
+    "javascript-obfuscator": "^4.1.1"
+  }
+}
