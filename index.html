@@ -139,6 +139,12 @@
             letter-spacing: -0.5px;
         }
 
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         .navbar-pill {
             font-size: 0.75rem;
             font-weight: 600;
@@ -147,6 +153,24 @@
             background: rgba(255,255,255,0.08);
             border: 1px solid rgba(255,255,255,0.12);
             color: var(--text-secondary);
+        }
+
+        .navbar-link {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(251,146,60,0.12);
+            border: 1px solid rgba(251,146,60,0.3);
+            color: #fdba74;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .navbar-link:hover {
+            background: rgba(251,146,60,0.22);
+            border-color: rgba(251,146,60,0.5);
+            transform: translateY(-1px);
         }
 
         /* ── Hero ── */
@@ -327,6 +351,7 @@
         .app-card[data-glow="purple"]:hover { box-shadow: 0 24px 50px rgba(168,85,247,0.25), 0 0 0 1px rgba(168,85,247,0.3); }
         .app-card[data-glow="pink"]:hover   { box-shadow: 0 24px 50px rgba(236,72,153,0.25), 0 0 0 1px rgba(236,72,153,0.3); }
         .app-card[data-glow="green"]:hover  { box-shadow: 0 24px 50px rgba(34,211,160,0.25), 0 0 0 1px rgba(34,211,160,0.3); }
+        .app-card[data-glow="orange"]:hover { box-shadow: 0 24px 50px rgba(251,146,60,0.25), 0 0 0 1px rgba(251,146,60,0.3); }
 
         /* ── Card header ── */
         .card-header {
@@ -451,6 +476,7 @@
         .dot-purple { background: var(--accent-purple); }
         .dot-pink   { background: var(--accent-pink); }
         .dot-green  { background: var(--accent-green); }
+        .dot-orange { background: var(--accent-orange); }
 
         /* ── Buttons ── */
         .app-links {
@@ -632,7 +658,10 @@
     <!-- Sticky navbar -->
     <nav class="navbar">
         <span class="navbar-brand">⚡ ProStores</span>
-        <span class="navbar-pill">10 Products</span>
+        <div class="navbar-right">
+            <a href="games/index.html" class="navbar-link">🎮 Games</a>
+            <span class="navbar-pill">10 Products</span>
+        </div>
     </nav>
 
     <div class="container">
@@ -1075,6 +1104,7 @@
             </div>
 
         </div>
+
 
         <!-- Footer -->
         <footer class="footer reveal">
