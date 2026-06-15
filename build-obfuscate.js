@@ -13,9 +13,9 @@ const JavaScriptObfuscator = require('javascript-obfuscator');
 const TARGETS = [
     'index.html',
     'games/index.html',
-    'games/flappy-bird/flappy-bird.html',
-    'games/bau-cua/bau-cua.html',
-    'games/gold-miner/gold-miner.html',
+    'games/flappy-bird/index.html',
+    'games/bau-cua/index.html',
+    'games/gold-miner/index.html',
 ];
 
 const OPTIONS = {
