@@ -15,6 +15,7 @@ const TARGETS = [
     'games/index.html',
     'games/flappy-bird/flappy-bird.html',
     'games/bau-cua/bau-cua.html',
+    'games/gold-miner/gold-miner.html',
 ];
 
 const OPTIONS = {
