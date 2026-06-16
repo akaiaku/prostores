@@ -18,6 +18,10 @@ const TARGETS = [
     'games/gold-miner/index.html',
 ];
 
+const JS_TARGETS = [
+    'games/game-ui.js',
+];
+
 const OPTIONS = {
     compact:                          true,
     controlFlowFlattening:            true,
@@ -81,6 +85,27 @@ for (const rel of TARGETS) {
     const obfuscated = obfuscateHtml(html);
     fs.writeFileSync(dest, obfuscated, 'utf8');
     console.log(`[ok]   original/${rel}  →  ${rel}`);
+}
+
+for (const rel of JS_TARGETS) {
+    const src  = path.join(originalDir, rel);
+    const dest = path.join(root, rel);
+
+    if (!fs.existsSync(src)) {
+        console.warn(`[skip] not found: original/${rel}`);
+        continue;
+    }
+
+    fs.mkdirSync(path.dirname(dest), { recursive: true });
+    const code = fs.readFileSync(src, 'utf8');
+    try {
+        const result = JavaScriptObfuscator.obfuscate(code, OPTIONS);
+        fs.writeFileSync(dest, result.getObfuscatedCode(), 'utf8');
+        console.log(`[ok]   original/${rel}  →  ${rel}`);
+    } catch (e) {
+        console.warn(`  [skip] obfuscation failed for ${rel}:`, e.message);
+        fs.writeFileSync(dest, code, 'utf8');
+    }
 }
 
 console.log('\nDone.');

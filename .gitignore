@@ -1,5 +1,5 @@
 coloring/android/1.1.1 copy
 coloring/ios/1.1.1 copy
 node_modules
-original/
+original/*
 package-lock.json
