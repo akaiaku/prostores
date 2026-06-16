@@ -17,6 +17,7 @@ const TARGETS = [
     'games/bau-cua/index.html',
     'games/gold-miner/index.html',
     'games/tai-xiu-la/index.html',
+    'games/plants-vs-zombies/index.html'
 ];
 
 const JS_TARGETS = [
