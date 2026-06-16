@@ -16,6 +16,7 @@ const TARGETS = [
     'games/flappy-bird/index.html',
     'games/bau-cua/index.html',
     'games/gold-miner/index.html',
+    'games/tai-xiu-la/index.html',
 ];
 
 const JS_TARGETS = [
