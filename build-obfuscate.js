@@ -21,6 +21,7 @@ const TARGETS = [
 ];
 
 const JS_TARGETS = [
+    'games/game-sound.js',
     'games/game-ui.js',
 ];
 
