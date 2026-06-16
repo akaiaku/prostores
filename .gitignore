@@ -4,3 +4,4 @@ node_modules
 original/*
 package-lock.json
 CLAUDE.md
+original/
