@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <title>Terms of Service — ProStores Games</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --accent-orange: #fb923c;
+            --text-primary: rgba(255,255,255,0.95);
+            --text-secondary: rgba(255,255,255,0.6);
+            --text-muted: rgba(255,255,255,0.4);
+            --glass-border: rgba(255,255,255,0.1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0f;
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        .aurora {
+            position: fixed; inset: 0; z-index: 0;
+            pointer-events: none; overflow: hidden;
+        }
+        .aurora-blob {
+            position: absolute; border-radius: 50%;
+            filter: blur(100px); opacity: 0.2;
+        }
+        .aurora-blob:nth-child(1) {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, #c2410c, transparent 70%);
+            top: -150px; left: -100px;
+        }
+        .aurora-blob:nth-child(2) {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, #7c3aed, transparent 70%);
+            bottom: 0; right: -100px;
+        }
+
+        .navbar {
+            position: sticky; top: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 16px 32px;
+            background: rgba(10,10,15,0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .navbar-brand {
+            font-size: 1.2rem; font-weight: 800;
+            background: linear-gradient(135deg, #a78bfa, #60a5fa);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; text-decoration: none; letter-spacing: -0.5px;
+        }
+        .navbar-back {
+            font-size: 0.75rem; font-weight: 600;
+            padding: 6px 14px; border-radius: 20px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: var(--text-secondary); text-decoration: none;
+            transition: all 0.2s;
+        }
+        .navbar-back:hover { background: rgba(255,255,255,0.13); color: var(--text-primary); }
+
+        .container {
+            position: relative; z-index: 2;
+            max-width: 760px; margin: 0 auto;
+            padding: 56px 24px 80px;
+        }
+
+        .page-header { text-align: center; margin-bottom: 56px; }
+        .page-eyebrow {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 0.75rem; font-weight: 600; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--accent-orange);
+            background: rgba(251,146,60,0.1);
+            border: 1px solid rgba(251,146,60,0.25);
+            padding: 5px 14px; border-radius: 20px; margin-bottom: 20px;
+        }
+        .page-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900; letter-spacing: -1.5px;
+            background: linear-gradient(135deg, #fb923c, #fbbf24);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; margin-bottom: 12px;
+        }
+        .page-meta { font-size: 0.85rem; color: var(--text-muted); }
+
+        .article {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px 44px;
+        }
+
+        .section { margin-bottom: 40px; }
+        .section:last-child { margin-bottom: 0; }
+
+        .section-num {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 28px; height: 28px; border-radius: 8px;
+            background: linear-gradient(135deg, #fb923c, #f59e0b);
+            font-size: 0.75rem; font-weight: 800; color: #0a0a0f;
+            margin-right: 10px; flex-shrink: 0;
+        }
+
+        h2 {
+            display: flex; align-items: center;
+            font-size: 1.05rem; font-weight: 700;
+            color: var(--text-primary); margin-bottom: 14px;
+            letter-spacing: -0.3px;
+        }
+
+        p { font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 12px; }
+        p:last-child { margin-bottom: 0; }
+
+        ul {
+            list-style: none; margin: 10px 0;
+            display: flex; flex-direction: column; gap: 8px;
+        }
+        ul li {
+            font-size: 0.9rem; color: var(--text-secondary);
+            padding-left: 20px; position: relative;
+        }
+        ul li::before {
+            content: '›';
+            position: absolute; left: 4px;
+            color: var(--accent-orange); font-weight: 700;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            margin: 32px 0;
+        }
+
+        .highlight-box {
+            background: rgba(251,146,60,0.08);
+            border: 1px solid rgba(251,146,60,0.2);
+            border-radius: 12px; padding: 16px 20px; margin: 14px 0;
+        }
+        .highlight-box p { color: rgba(253,186,116,0.9); margin: 0; }
+
+        .contact-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px; padding: 20px 24px;
+            display: flex; align-items: center; gap: 16px; margin-top: 14px;
+        }
+        .contact-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            background: linear-gradient(135deg, #fb923c, #f59e0b);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; flex-shrink: 0;
+        }
+        .contact-info p { color: var(--text-secondary); font-size: 0.85rem; margin: 0; }
+        .contact-info a { color: #fbbf24; text-decoration: none; }
+        .contact-info a:hover { text-decoration: underline; }
+
+        .footer {
+            position: relative; z-index: 2;
+            text-align: center; padding: 32px 24px;
+            border-top: 1px solid var(--glass-border);
+        }
+        .footer p { font-size: 0.8rem; color: var(--text-muted); }
+        .footer a { color: var(--text-secondary); text-decoration: none; }
+        .footer a:hover { color: var(--text-primary); }
+
+        @media (max-width: 600px) {
+            .article { padding: 28px 22px; }
+            .navbar { padding: 14px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="aurora" aria-hidden="true">
+        <div class="aurora-blob"></div>
+        <div class="aurora-blob"></div>
+    </div>
+
+    <nav class="navbar">
+        <a href="../index.html" class="navbar-brand">⚡ ProStores</a>
+        <a href="index.html" class="navbar-back">← Games</a>
+    </nav>
+
+    <div class="container">
+        <header class="page-header">
+            <div class="page-eyebrow">📋 Legal</div>
+            <h1 class="page-title">Terms of Service</h1>
+            <p class="page-meta">Last updated: June 19, 2026</p>
+        </header>
+
+        <div class="article">
+
+            <div class="section">
+                <h2><span class="section-num">1</span>Acceptance of Terms</h2>
+                <p>By accessing and using the games on ProStores Games, you agree to be bound by these Terms of Service. Please read them carefully before playing.</p>
+                <p>If you do not agree with any part of these terms, please do not use our service.</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section">
+                <h2><span class="section-num">2</span>Description of Service</h2>
+                <p>ProStores Games provides free browser-based games, including:</p>
+                <ul>
+                    <li>Vietnamese folk games (Bầu Cua Tôm Cá, Tài Xỉu 4 Lá)</li>
+                    <li>Classic arcade games (Flappy Bird, Gold Miner)</li>
+                    <li>Strategy games (Plants vs Zombies)</li>
+                </ul>
+                <div class="highlight-box">
+                    <p>⚠️ All games are completely free and for entertainment purposes only. No real-money transactions or actual gambling take place.</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section">
+                <h2><span class="section-num">3</span>Acceptable Use</h2>
+                <p>By using the service, you agree to:</p>
+                <ul>
+                    <li>Use the service only for lawful, personal entertainment purposes</li>
+                    <li>Not attempt to interfere with, exploit, or cheat the game systems</li>
+                    <li>Not copy, distribute, or commercialize any content without permission</li>
+                    <li>Not use automated tools, bots, or scripts to interact with the games</li>
+                    <li>Not attempt to harm the experience of other users</li>
+                </ul>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section">
+                <h2><span class="section-num">4</span>Intellectual Property</h2>
+                <p>All content on ProStores Games — including design, graphics, code, and game experiences — is the property of ProStores and is protected by intellectual property law.</p>
+                <p>Original game characters and trademarks (Flappy Bird, Plants vs Zombies, Gold Miner) belong to their respective authors and publishers. The versions on ProStores are non-commercial fan recreations for entertainment purposes.</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section">
+                <h2><span class="section-num">5</span>Disclaimer of Warranties</h2>
+                <p>ProStores Games is provided "as is" without warranties of any kind. We do not guarantee that:</p>
+                <ul>
+                    <li>The service will be available at all times, uninterrupted, or error-free</li>
+                    <li>Results obtained from using the service will be accurate or reliable</li>
+                    <li>Technical errors will be resolved within a specific timeframe</li>
+                </ul>
+                <p>ProStores is not liable for any direct, indirect, incidental, or consequential damages arising from your use of the service.</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section">
+                <h2><span class="section-num">6</span>Age Requirements</h2>
+                <p>ProStores Games is designed for users aged <strong style="color:var(--text-primary)">13 and older</strong>. Users under 13 should have parental supervision.</p>
+                <p>Some games feature simulated gambling mechanics (virtual coins only). Users under 18 should be reminded by parents or guardians that these are simulations and do not reflect real-world gambling.</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section">
+                <h2><span class="section-num">7</span>Changes to Terms</h2>
+                <p>We may update these Terms at any time. Changes will be posted on this page with a new "Last updated" date. Continued use of the service after changes are posted constitutes your acceptance of the new terms.</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section">
+                <h2><span class="section-num">8</span>Contact Us</h2>
+                <p>If you have questions about these Terms of Service, please reach out:</p>
+                <div class="contact-card">
+                    <div class="contact-icon">✉️</div>
+                    <div class="contact-info">
+                        <p style="color:var(--text-primary); font-weight:600; margin-bottom:4px !important;">Support email</p>
+                        <p><a href="mailto:linhhvtt@gmail.com">linhhvtt@gmail.com</a></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2026 ProStores ·
+            <a href="terms.html">Terms of Service</a> ·
+            <a href="privacy.html">Privacy Policy</a> ·
+            <a href="index.html">Games</a>
+        </p>
+    </footer>
+</body>
+</html>

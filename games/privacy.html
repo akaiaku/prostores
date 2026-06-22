@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <title>Privacy Policy — ProStores Games</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --accent-purple: #a855f7;
+            --accent-blue: #60a5fa;
+            --text-primary: rgba(255,255,255,0.95);
+            --text-secondary: rgba(255,255,255,0.6);
+            --text-muted: rgba(255,255,255,0.4);
+            --glass-border: rgba(255,255,255,0.1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0f;
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        .aurora {
+            position: fixed; inset: 0; z-index: 0;
+            pointer-events: none; overflow: hidden;
+        }
+        .aurora-blob {
+            position: absolute; border-radius: 50%;
+            filter: blur(100px); opacity: 0.2;
+        }
+        .aurora-blob:nth-child(1) {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, #7c3aed, transparent 70%);
+            top: -100px; right: -100px;
+        }
+        .aurora-blob:nth-child(2) {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, #1d4ed8, transparent 70%);
+            bottom: 0; left: -80px;
+        }
+
+        .navbar {
+            position: sticky; top: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 16px 32px;
+            background: rgba(10,10,15,0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .navbar-brand {
+            font-size: 1.2rem; font-weight: 800;
+            background: linear-gradient(135deg, #a78bfa, #60a5fa);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; text-decoration: none; letter-spacing: -0.5px;
+        }
+        .navbar-back {
+            font-size: 0.75rem; font-weight: 600;
+            padding: 6px 14px; border-radius: 20px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: var(--text-secondary); text-decoration: none;
+            transition: all 0.2s;
+        }
+        .navbar-back:hover { background: rgba(255,255,255,0.13); color: var(--text-primary); }
+
+        .container {
+            position: relative; z-index: 2;
+            max-width: 760px; margin: 0 auto;
+            padding: 56px 24px 80px;
+        }
+
+        .page-header { text-align: center; margin-bottom: 56px; }
+        .page-eyebrow {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 0.75rem; font-weight: 600; letter-spacing: 2px;
+            text-transform: uppercase; color: #c084fc;
+            background: rgba(168,85,247,0.1);
+            border: 1px solid rgba(168,85,247,0.25);
+            padding: 5px 14px; border-radius: 20px; margin-bottom: 20px;
+        }
+        .page-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900; letter-spacing: -1.5px;
+            background: linear-gradient(135deg, #a855f7, #60a5fa);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; margin-bottom: 12px;
+        }
+        .page-meta { font-size: 0.85rem; color: var(--text-muted); }
+
+        .article {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px 44px;
+        }
+
+        .section { margin-bottom: 40px; }
+        .section:last-child { margin-bottom: 0; }
+
+        .section-num {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 28px; height: 28px; border-radius: 8px;
+            background: linear-gradient(135deg, #a855f7, #60a5fa);
+            font-size: 0.75rem; font-weight: 800; color: white;
+            margin-right: 10px; flex-shrink: 0;
+        }
+
+        h2 {
+            display: flex; align-items: center;
+            font-size: 1.05rem; font-weight: 700;
+            color: var(--text-primary); margin-bottom: 14px;
+            letter-spacing: -0.3px;
+        }
+
+        p { font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 12px; }
+        p:last-child { margin-bottom: 0; }
+
+        ul {
+            list-style: none; margin: 10px 0;
+            display: flex; flex-direction: column; gap: 8px;
+        }
+        ul li {
+            font-size: 0.9rem; color: var(--text-secondary);
+            padding-left: 20px; position: relative;
+        }
+        ul li::before {
+            content: '›';
+            position: absolute; left: 4px;
+            color: #c084fc; font-weight: 700;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            margin: 32px 0;
+        }
+
+        .data-table {
+            width: 100%; border-collapse: collapse; margin: 14px 0;
+            font-size: 0.88rem;
+        }
+        .data-table th {
+            text-align: left; padding: 10px 14px;
+            background: rgba(255,255,255,0.06);
+            color: var(--text-primary); font-weight: 600;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .data-table td {
+            padding: 10px 14px; color: var(--text-secondary);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .data-table tr:last-child td { border-bottom: none; }
+
+        .badge {
+            display: inline-block; font-size: 0.7rem; font-weight: 700;
+            padding: 2px 8px; border-radius: 20px;
+        }
+        .badge-green { background: rgba(34,197,94,0.15); color: #86efac; border: 1px solid rgba(34,197,94,0.25); }
+        .badge-gray  { background: rgba(255,255,255,0.08); color: var(--text-secondary); border: 1px solid rgba(255,255,255,0.12); }
+
+        .highlight-box {
+            background: rgba(168,85,247,0.08);
+            border: 1px solid rgba(168,85,247,0.2);
+            border-radius: 12px; padding: 16px 20px; margin: 14px 0;
+        }
+        .highlight-box p { color: rgba(216,180,254,0.9); margin: 0; }
+
+        code {
+            background: rgba(255,255,255,0.08);
+            padding: 2px 6px; border-radius: 4px; font-size: 0.85em;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px; padding: 20px 24px;
+            display: flex; align-items: center; gap: 16px; margin-top: 14px;
+        }
+        .contact-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            background: linear-gradient(135deg, #a855f7, #60a5fa);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; flex-shrink: 0;
+        }
+        .contact-info p { color: var(--text-secondary); font-size: 0.85rem; margin: 0; }
+        .contact-info a { color: #c084fc; text-decoration: none; }
+        .contact-info a:hover { text-decoration: underline; }
+
+        .footer {
+            position: relative; z-index: 2;
+            text-align: center; padding: 32px 24px;
+            border-top: 1px solid var(--glass-border);
+        }
+        .footer p { font-size: 0.8rem; color: var(--text-muted); }
+        .footer a { color: var(--text-secondary); text-decoration: none; }
+        .footer a:hover { color: var(--text-primary); }
+
+        @media (max-width: 600px) {
+            .article { padding: 28px 22px; }
+            .navbar { padding: 14px 20px; }
+            .data-table { font-size: 0.8rem; }
+            .data-table th, .data-table td { padding: 8px 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="aurora" aria-hidden="true">
+        <div class="aurora-blob"></div>
+        <div class="aurora-blob"></div>
+    </div>
+
+    <nav class="navbar">
+        <a href="../index.html" class="navbar-brand">⚡ ProStores</a>
+        <a href="index.html" class="navbar-back">← Games</a>
+    </nav>
+
+    <div class="container">
+        <header class="page-header">
+            <div class="page-eyebrow">🔒 Privacy</div>
+            <h1 class="page-title">Privacy Policy</h1>
+            <p class="page-meta">Last updated: June 19, 2026</p>
+        </header>
+
+        <div class="article">
+
+            <div class="section">
+                <h2><span class="section-num">1</span>Our Commitment</h2>
+                <p>ProStores Games respects your privacy. This policy clearly explains what information we collect (and what we do <em>not</em> collect), and how that information is used.</p>
+                <div class="highlight-box">
+                    <p>🛡️ ProStores Games <strong>does not require account registration</strong>, does not collect personal information, and does not sell user data to third parties.</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section">
+                <h2><span class="section-num">2</span>What We Collect</h2>
+                <p>The table below describes exactly what is stored when you play our games:</p>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Data type</th>
+                            <th>Description</th>
+                            <th>Where stored</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>High score</td>
+                            <td>Your best score in each game</td>
+                            <td>Browser localStorage</td>
+                            <td><span class="badge badge-green">✓ Device only</span></td>
+                        </tr>
+                        <tr>
+                            <td>Game settings</td>
+                            <td>Volume, display preferences</td>
+                            <td>Browser localStorage</td>
+                            <td><span class="badge badge-green">✓ Device only</span></td>
+                        </tr>
+                        <tr>
+                            <td>IP address</td>
+                            <td>Basic access logs (via hosting provider)</td>
+                            <td>Server logs</td>
+                            <td><span class="badge badge-gray">Automatic · Anonymous</span></td>
+                        </tr>
+                        <tr>
+                            <td>Personal information</td>
+                            <td>Name, email, address, etc.</td>
+                            <td>—</td>
+                            <td><span class="badge badge-green">✗ Not collected</span></td>
+                        </tr>
+                        <tr>
+                            <td>Tracking cookies</td>
+                            <td>Analytics or behavioral cookies</td>
+                            <td>—</td>
+                            <td><span class="badge badge-green">✗ Not used</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section">
+                <h2><span class="section-num">3</span>LocalStorage & Cookies</h2>
+                <p>Our games use the browser's <code>localStorage</code> API to save high scores and game settings. This data:</p>
+                <ul>
+                    <li>Lives only on your device — it is never sent to our servers</li>
+                    <li>Is not shared with any third party</li>
+                    <li>Can be deleted at any time by clearing your browser's site data</li>
+                    <li>Contains no personally identifiable information</li>
+                </ul>
+                <p>We do <strong style="color:var(--text-primary)">not</strong> use tracking cookies, advertising cookies, or any other tracking technology.</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section">
+                <h2><span class="section-num">4</span>Third-Party Resources</h2>
+                <p>This site uses <strong style="color:var(--text-primary)">Google Fonts</strong> (Inter) for typography. When fonts are loaded, your browser connects to Google's servers, which may log your IP address per Google's own privacy policy.</p>
+                <p>Beyond Google Fonts, ProStores Games loads no third-party resources — no ads, no external JavaScript CDNs, no tracking pixels.</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section">
+                <h2><span class="section-num">5</span>Children's Privacy</h2>
+                <p>ProStores Games does not knowingly collect information from children under the age of 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us so we can delete it promptly.</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section">
+                <h2><span class="section-num">6</span>Data Sharing</h2>
+                <p>We do <strong style="color:var(--text-primary)">not sell, rent, or share</strong> any data with third parties for commercial purposes. Data is handled internally and only to the extent necessary to operate the service.</p>
+                <p>The only exception is a legally binding request from a competent governmental authority.</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section">
+                <h2><span class="section-num">7</span>Your Rights</h2>
+                <p>You have full control over the data stored on your device:</p>
+                <ul>
+                    <li><strong style="color:var(--text-primary)">View data:</strong> Open DevTools → Application → Local Storage to inspect saved game data</li>
+                    <li><strong style="color:var(--text-primary)">Delete data:</strong> Clear localStorage or remove all site data in your browser settings</li>
+                    <li><strong style="color:var(--text-primary)">Prevent storage:</strong> Use Private / Incognito mode — data is discarded automatically when you close the tab</li>
+                </ul>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section">
+                <h2><span class="section-num">8</span>Policy Changes</h2>
+                <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with a new "Last updated" date. We encourage you to review this page periodically.</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section">
+                <h2><span class="section-num">9</span>Contact Us</h2>
+                <p>Questions about privacy? We're here to help.</p>
+                <div class="contact-card">
+                    <div class="contact-icon">✉️</div>
+                    <div class="contact-info">
+                        <p style="color:var(--text-primary); font-weight:600; margin-bottom:4px !important;">Privacy support</p>
+                        <p><a href="mailto:linhhvtt@gmail.com">linhhvtt@gmail.com</a></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2026 ProStores ·
+            <a href="terms.html">Terms of Service</a> ·
+            <a href="privacy.html">Privacy Policy</a> ·
+            <a href="index.html">Games</a>
+        </p>
+    </footer>
+</body>
+</html>

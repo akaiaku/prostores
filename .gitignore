@@ -5,3 +5,4 @@ original/*
 package-lock.json
 CLAUDE.md
 original/
+dist/
