@@ -113,4 +113,22 @@ for (const rel of JS_TARGETS) {
     }
 }
 
+// ---- Copy assets ----
+function copyDir(src, dest) {
+    fs.mkdirSync(dest, { recursive: true });
+    for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
+        const s = path.join(src, entry.name);
+        const d = path.join(dest, entry.name);
+        if (entry.isDirectory()) copyDir(s, d);
+        else fs.copyFileSync(s, d);
+    }
+}
+
+const assetsSrc  = path.join(originalDir, 'games', 'assets');
+const assetsDest = path.join(root, 'games', 'assets');
+if (fs.existsSync(assetsSrc)) {
+    copyDir(assetsSrc, assetsDest);
+    console.log('[ok]   original/games/assets/  →  games/assets/');
+}
+
 console.log('\nDone.');

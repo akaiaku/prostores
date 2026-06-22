@@ -6,7 +6,7 @@
     "obfuscate": "node build-obfuscate.js",
     "icons": "node build-icons.js",
     "zip": "node build-zip.js",
-    "build": "npm run icons && npm run obfuscate && npm run zip"
+    "build": "npm run obfuscate && npm run zip"
   },
   "devDependencies": {
     "archiver": "^8.0.0",

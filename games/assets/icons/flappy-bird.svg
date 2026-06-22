@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <defs>
+    <linearGradient id="bg-bird" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+    <!-- Clouds -->
+  </defs>
+  <rect width="80" height="80" rx="20" fill="url(#bg-bird)"/>
+  <!-- Small cloud hints -->
+  <ellipse cx="15" cy="18" rx="9" ry="5" fill="rgba(255,255,255,0.3)"/>
+  <ellipse cx="22" cy="15" rx="7" ry="4" fill="rgba(255,255,255,0.3)"/>
+  <ellipse cx="60" cy="22" rx="8" ry="4.5" fill="rgba(255,255,255,0.22)"/>
+  <!-- Tail feathers -->
+  <polygon points="14,44 6,36 6,52" fill="#f59e0b"/>
+  <!-- Body (yellow) -->
+  <ellipse cx="40" cy="44" rx="22" ry="18" fill="#fbbf24"/>
+  <!-- Belly (lighter) -->
+  <ellipse cx="44" cy="50" rx="12" ry="9" fill="#fef3c7"/>
+  <!-- Wing (raised, amber) -->
+  <ellipse cx="34" cy="32" rx="17" ry="6.5" fill="#f59e0b" transform="rotate(-28 34 32)"/>
+  <!-- Eye (white sclera) -->
+  <circle cx="54" cy="39" rx="10" ry="9.5" fill="white"/>
+  <!-- Iris (dark blue) -->
+  <circle cx="56" cy="39" r="7" fill="#1e3a5f"/>
+  <!-- Eye shine -->
+  <circle cx="58.5" cy="36" r="2.8" fill="white"/>
+  <!-- Upper beak -->
+  <path d="M60,36 L72,40 L60,41 Z" fill="#f97316"/>
+  <!-- Lower beak -->
+  <path d="M60,41 L72,40 L60,46 Z" fill="#ea580c"/>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <defs>
+    <linearGradient id="bg-pvz" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#15803d"/>
+      <stop offset="100%" stop-color="#4ade80"/>
+    </linearGradient>
+  </defs>
+  <rect width="80" height="80" rx="20" fill="url(#bg-pvz)"/>
+  <!-- 8 petals alternating yellow/amber, rotating around (40,34) -->
+  <g transform="translate(40,34) rotate(0)"><ellipse cx="0" cy="-16" rx="5.5" ry="9" fill="#fbbf24"/></g>
+  <g transform="translate(40,34) rotate(45)"><ellipse cx="0" cy="-16" rx="5.5" ry="9" fill="#f59e0b"/></g>
+  <g transform="translate(40,34) rotate(90)"><ellipse cx="0" cy="-16" rx="5.5" ry="9" fill="#fbbf24"/></g>
+  <g transform="translate(40,34) rotate(135)"><ellipse cx="0" cy="-16" rx="5.5" ry="9" fill="#f59e0b"/></g>
+  <g transform="translate(40,34) rotate(180)"><ellipse cx="0" cy="-16" rx="5.5" ry="9" fill="#fbbf24"/></g>
+  <g transform="translate(40,34) rotate(225)"><ellipse cx="0" cy="-16" rx="5.5" ry="9" fill="#f59e0b"/></g>
+  <g transform="translate(40,34) rotate(270)"><ellipse cx="0" cy="-16" rx="5.5" ry="9" fill="#fbbf24"/></g>
+  <g transform="translate(40,34) rotate(315)"><ellipse cx="0" cy="-16" rx="5.5" ry="9" fill="#f59e0b"/></g>
+  <!-- Center disk -->
+  <circle cx="40" cy="34" r="13" fill="#92400e"/>
+  <circle cx="40" cy="34" r="12" fill="#78350f"/>
+  <!-- Seed dots -->
+  <circle cx="36" cy="30" r="1.8" fill="#fbbf24" opacity="0.65"/>
+  <circle cx="44" cy="30" r="1.8" fill="#fbbf24" opacity="0.65"/>
+  <circle cx="36" cy="38" r="1.8" fill="#fbbf24" opacity="0.65"/>
+  <circle cx="44" cy="38" r="1.8" fill="#fbbf24" opacity="0.65"/>
+  <circle cx="40" cy="34" r="1.8" fill="#fbbf24" opacity="0.5"/>
+  <!-- Eyes (white with dark pupil) -->
+  <circle cx="35.5" cy="31.5" r="2.8" fill="#fef3c7"/>
+  <circle cx="44.5" cy="31.5" r="2.8" fill="#fef3c7"/>
+  <circle cx="35.8" cy="31.8" r="1.2" fill="#1c0a00"/>
+  <circle cx="44.8" cy="31.8" r="1.2" fill="#1c0a00"/>
+  <!-- Smile -->
+  <path d="M35 38 Q40 43 45 38" stroke="#fef3c7" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Stem -->
+  <line x1="40" y1="47" x2="40" y2="68" stroke="#166534" stroke-width="4.5" stroke-linecap="round"/>
+  <!-- Leaves -->
+  <ellipse cx="30" cy="58" rx="11" ry="4.5" fill="#16a34a" transform="rotate(-30 30 58)"/>
+  <ellipse cx="50" cy="58" rx="11" ry="4.5" fill="#16a34a" transform="rotate(30 50 58)"/>
+</svg>
