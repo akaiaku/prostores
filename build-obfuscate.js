@@ -12,6 +12,8 @@ const JavaScriptObfuscator = require('javascript-obfuscator');
 
 const TARGETS = [
     'index.html',
+    'privacy.html',
+    'terms.html',
     'games/index.html',
     'games/flappy-bird/index.html',
     'games/bau-cua/index.html',
