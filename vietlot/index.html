@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kết quả Vietlott</title>
+<style>
+  :root {
+    --page: #f9f9f7; --surface: #fcfcfb;
+    --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+    --grid: #e1e0d9; --baseline: #c3c2b7; --border: rgba(11,11,11,0.10);
+    --series: #2a78d6; --series-hover: #1c5cab; --ball-text: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --page: #0d0d0d; --surface: #1a1a19;
+      --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+      --grid: #2c2c2a; --baseline: #383835; --border: rgba(255,255,255,0.10);
+      --series: #3987e5; --series-hover: #6da7ec;
+    }
+  }
+  :root[data-theme="light"] {
+    --page: #f9f9f7; --surface: #fcfcfb;
+    --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+    --grid: #e1e0d9; --baseline: #c3c2b7; --border: rgba(11,11,11,0.10);
+    --series: #2a78d6; --series-hover: #1c5cab;
+  }
+  :root[data-theme="dark"] {
+    --page: #0d0d0d; --surface: #1a1a19;
+    --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --baseline: #383835; --border: rgba(255,255,255,0.10);
+    --series: #3987e5; --series-hover: #6da7ec;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--page); color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 14px; line-height: 1.5; padding: 24px 16px 48px;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  h1 { font-size: 22px; font-weight: 650; }
+  .built { color: var(--muted); font-size: 12px; }
+  #themeBtn {
+    border: 1px solid var(--border); background: var(--surface); color: var(--ink-2);
+    border-radius: 8px; padding: 4px 10px; font: inherit; font-size: 12px; cursor: pointer;
+  }
+
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 16px 0; }
+  .tabs button {
+    border: 1px solid var(--border); background: var(--surface); color: var(--ink-2);
+    border-radius: 999px; padding: 6px 14px; font: inherit; cursor: pointer;
+  }
+  .tabs button.active { background: var(--series); border-color: var(--series); color: #fff; font-weight: 600; }
+
+  .filters { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+  .filters label { color: var(--ink-2); font-size: 13px; }
+  .filters input[type=date] {
+    border: 1px solid var(--border); background: var(--surface); color: var(--ink);
+    border-radius: 8px; padding: 4px 8px; font: inherit; font-size: 13px;
+  }
+  .presets { display: flex; gap: 4px; }
+  .presets button {
+    border: 1px solid var(--border); background: var(--surface); color: var(--ink-2);
+    border-radius: 8px; padding: 4px 10px; font: inherit; font-size: 12px; cursor: pointer;
+  }
+  .presets button.active { color: var(--ink); font-weight: 650; border-color: var(--baseline); }
+
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .tile { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+  .tile .label { color: var(--ink-2); font-size: 13px; margin-bottom: 4px; }
+  .tile .value { font-size: 26px; font-weight: 650; }
+  .tile .sub { color: var(--muted); font-size: 12px; margin-top: 2px; }
+
+  .balls { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 6px; }
+  .ball {
+    width: 34px; height: 34px; border-radius: 50%; background: var(--series); color: var(--ball-text);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 650; font-size: 14px; font-variant-numeric: tabular-nums;
+  }
+  .ball.wide { width: auto; min-width: 34px; border-radius: 999px; padding: 0 10px; }
+  .ball.sm { width: 26px; height: 26px; font-size: 12px; }
+  .hc-cell { display: inline-flex; align-items: center; gap: 8px; }
+  .hc-cell .cnt { color: var(--ink-2); font-size: 12px; }
+  .pred-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .pred-grid h3 { font-size: 13px; font-weight: 650; color: var(--ink-2); margin-bottom: 8px; }
+  .pred-row { display: flex; gap: 6px; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
+  .pred-row .tag { color: var(--muted); font-size: 12px; width: 46px; }
+  .pred-opt {
+    display: inline-flex; align-items: center; gap: 6px; margin-bottom: 12px;
+    color: var(--ink-2); font-size: 13px; cursor: pointer;
+  }
+  .pred-opt input { accent-color: var(--series); }
+  #predBtn {
+    margin-top: 6px; border: 1px solid var(--border); background: var(--surface); color: var(--ink-2);
+    border-radius: 8px; padding: 5px 12px; font: inherit; font-size: 12px; cursor: pointer;
+  }
+  .plus { color: var(--muted); font-weight: 600; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+  .card h2 { font-size: 15px; font-weight: 650; }
+  .card .sub { color: var(--muted); font-size: 12px; margin-bottom: 10px; }
+  .chart-scroll { overflow-x: auto; }
+  #chart { display: block; }
+
+  #tooltip {
+    position: fixed; pointer-events: none; z-index: 10; display: none;
+    background: var(--surface); color: var(--ink); border: 1px solid var(--border);
+    border-radius: 8px; padding: 6px 10px; font-size: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.18); white-space: nowrap;
+  }
+  #tooltip b { font-size: 13px; }
+  #tooltip .t2 { color: var(--ink-2); }
+
+  .cold { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chip {
+    border: 1px solid var(--border); border-radius: 999px; padding: 3px 10px;
+    font-size: 12px; color: var(--ink-2);
+  }
+  .chip b { color: var(--ink); font-variant-numeric: tabular-nums; }
+
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+  th { color: var(--muted); font-size: 12px; font-weight: 600; }
+  td { font-variant-numeric: tabular-nums; }
+  td.res { letter-spacing: .3px; }
+  td .tier { color: var(--muted); font-size: 12px; margin-right: 4px; }
+  .table-scroll { overflow-x: auto; }
+
+  .pager { display: flex; gap: 6px; align-items: center; justify-content: flex-end; margin-top: 10px; flex-wrap: wrap; }
+  .pager button {
+    border: 1px solid var(--border); background: var(--surface); color: var(--ink-2);
+    border-radius: 8px; padding: 4px 10px; font: inherit; font-size: 12px; cursor: pointer;
+  }
+  .pager button:disabled { opacity: .4; cursor: default; }
+  .pager .info { color: var(--muted); font-size: 12px; }
+  footer { color: var(--muted); font-size: 12px; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Kết quả Vietlott</h1>
+    <div style="display:flex;gap:10px;align-items:center">
+      <span class="built" id="built"></span>
+      <button id="themeBtn" type="button">Sáng / Tối</button>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs"></nav>
+
+  <div class="filters">
+    <label>Từ <input type="date" id="dateFrom"></label>
+    <label>đến <input type="date" id="dateTo"></label>
+    <div class="presets" id="presets">
+      <button data-days="30">30 ngày</button>
+      <button data-days="90">90 ngày</button>
+      <button data-days="365">1 năm</button>
+      <button data-days="0" class="active">Tất cả</button>
+    </div>
+  </div>
+
+  <div class="tiles">
+    <div class="tile"><div class="label">Tổng số kỳ (trong khoảng lọc)</div><div class="value" id="tDraws">–</div><div class="sub" id="tRange"></div></div>
+    <div class="tile" style="grid-column: span 2; min-width: 300px;"><div class="label" id="tLatestLabel">Kỳ mới nhất</div><div class="balls" id="tLatest"></div><div class="sub" id="tLatestSub"></div></div>
+  </div>
+
+  <div class="card">
+    <h2 id="chartTitle">Tần suất xuất hiện</h2>
+    <div class="sub" id="chartSub"></div>
+    <div class="chart-scroll"><svg id="chart" role="img"></svg></div>
+  </div>
+
+  <div class="card" id="hotColdCard">
+    <h2 id="hotColdTitle">Số ra nhiều nhất / ít nhất</h2>
+    <div class="sub">Tính trong khoảng thời gian đang lọc — chỉ mang tính tham khảo, không phải dự đoán chắc chắn</div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th style="width:60px">Hạng</th><th>Ra nhiều nhất</th><th>Ra ít nhất</th></tr></thead>
+        <tbody id="hotColdBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" id="predCard">
+    <h2 id="predTitle">Bộ số gợi ý theo luật chơi</h2>
+    <div class="sub">Sinh từ nhóm số ra nhiều / ít trong khoảng lọc — chỉ để vui chơi tham khảo, xác suất trúng của mọi bộ số là như nhau</div>
+    <label class="pred-opt"><input type="checkbox" id="predExclude" checked> Loại các số vừa về trong 2 kỳ gần nhất</label>
+    <div class="pred-grid">
+      <div><h3>Theo số ra NHIỀU</h3><div id="predHot"></div></div>
+      <div><h3>Theo số ra ÍT</h3><div id="predCold"></div></div>
+    </div>
+    <button id="predBtn" type="button">Tạo bộ khác</button>
+  </div>
+
+  <div class="card" id="coldCard">
+    <h2>Lâu chưa xuất hiện</h2>
+    <div class="sub">Tính trong khoảng thời gian đang lọc</div>
+    <div class="cold" id="cold"></div>
+  </div>
+
+  <div class="card">
+    <h2>Bảng kết quả</h2>
+    <div class="sub" id="tableSub"></div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th style="width:110px">Ngày</th><th style="width:90px">Kỳ</th><th>Kết quả</th></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <div class="pager">
+      <span class="info" id="pageInfo"></span>
+      <button id="pFirst">«</button><button id="pPrev">‹</button>
+      <button id="pNext">›</button><button id="pLast">»</button>
+    </div>
+  </div>
+
+  <footer>Nguồn dữ liệu: vietlott.vn (qua repo vietlott-data). Kết quả quay số là ngẫu nhiên — thống kê chỉ mang tính tham khảo.</footer>
+</div>
+<div id="tooltip"></div>
+
+<script>
+(function () {
+  const GAME_META = {
+    power655: { file: "power655.jsonl", name: "Power 6/55", max_num: 55 },
+    power645: { file: "power645.jsonl", name: "Mega 6/45", max_num: 45 },
+    keno: { file: "keno.jsonl", name: "Keno", max_num: 80 },
+    "3d": { file: "3d.jsonl", name: "Max 3D", max_num: null },
+    "3d_pro": { file: "3d_pro.jsonl", name: "Max 3D Pro", max_num: null },
+    bingo18: { file: "bingo18.jsonl", name: "Bingo18", max_num: 6 },
+  };
+  const DATA_URL = "https://raw.githubusercontent.com/vietvudanh/vietlott-data/master/data/";
+  const D = {};      // dữ liệu đã nạp, theo trò
+  const GAMES = Object.keys(GAME_META);
+  const PAGE_SIZE = 20;
+  const TIER_SHORT = { "Giải Đặc biệt": "ĐB", "Giải Nhất": "Nhất", "Giải Nhì": "Nhì", "Giải ba": "Ba" };
+
+  const params = new URLSearchParams(location.search);
+  if (["light", "dark"].includes(params.get("theme"))) document.documentElement.dataset.theme = params.get("theme");
+  const state = { game: GAMES.includes(params.get("g")) ? params.get("g") : GAMES[0], from: "", to: "", page: 1 };
+  const $ = id => document.getElementById(id);
+  const fmtInt = n => n.toLocaleString("vi-VN");
+
+  const setStatus = t => { $("built").textContent = t; };
+
+  // Tải dữ liệu online theo từng trò; mất mạng thì rơi về file build sẵn (web/data/*.js)
+  async function loadGame(g) {
+    if (D[g]) return;
+    const meta = GAME_META[g];
+    setStatus("Đang tải " + meta.name + " ...");
+    try {
+      const resp = await fetch(DATA_URL + meta.file, { cache: "no-cache" });
+      if (!resp.ok) throw new Error("HTTP " + resp.status);
+      const text = await resp.text();
+      const rows = [];
+      for (const line of text.split("\n")) {
+        const l = line.trim();
+        if (!l) continue;
+        try { const r = JSON.parse(l); rows.push([r.date || "", String(r.id || ""), r.result]); } catch (e) {}
+      }
+      rows.sort((a, b) => (a[0] + a[1] < b[0] + b[1] ? -1 : 1));
+      D[g] = { name: meta.name, max_num: meta.max_num, rows };
+      setStatus("Dữ liệu online — cập nhật lúc " + new Date().toLocaleTimeString("vi-VN"));
+    } catch (err) {
+      await new Promise(done => {
+        const s = document.createElement("script");
+        s.src = "data/" + g + ".js"; s.onload = done; s.onerror = done;
+        document.head.appendChild(s);
+      });
+      if (window.VIETLOTT && window.VIETLOTT[g]) {
+        D[g] = window.VIETLOTT[g];
+        setStatus("Không tải được online — đang dùng dữ liệu build sẵn" +
+          (window.VIETLOTT_META ? " (" + window.VIETLOTT_META.built + ")" : ""));
+      } else {
+        setStatus("Không tải được dữ liệu " + meta.name + " — kiểm tra mạng hoặc chạy build_web.py");
+      }
+    }
+  }
+
+  // ----- chủ đề sáng/tối -----
+  $("themeBtn").addEventListener("click", () => {
+    const r = document.documentElement;
+    const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+    const cur = r.dataset.theme || (dark ? "dark" : "light");
+    r.dataset.theme = cur === "dark" ? "light" : "dark";
+    render();
+  });
+
+  // ----- tab trò chơi -----
+  const tabs = $("tabs");
+  GAMES.forEach(g => {
+    const b = document.createElement("button");
+    b.textContent = GAME_META[g].name;
+    b.dataset.game = g;
+    b.addEventListener("click", async () => {
+      state.game = g; state.page = 1;
+      await loadGame(g);
+      const preset = document.querySelector("#presets button.active");
+      if (preset) applyPreset(preset); // tính lại khoảng lọc theo kỳ mới nhất của trò vừa chọn
+      render();
+    });
+    tabs.appendChild(b);
+  });
+
+  // ----- bộ lọc ngày -----
+  $("dateFrom").addEventListener("change", e => { state.from = e.target.value; state.page = 1; clearPreset(); render(); });
+  $("dateTo").addEventListener("change", e => { state.to = e.target.value; state.page = 1; clearPreset(); render(); });
+  function clearPreset() { $("presets").querySelectorAll("button").forEach(b => b.classList.remove("active")); }
+  function applyPreset(b) {
+    clearPreset(); b.classList.add("active");
+    const days = +b.dataset.days;
+    if (!days) { state.from = state.to = ""; }
+    else {
+      const rows = D[state.game] ? D[state.game].rows : [];
+      const last = rows.length ? rows[rows.length - 1][0] : "";
+      const d = new Date(last || Date.now()); d.setDate(d.getDate() - days);
+      state.from = d.toISOString().slice(0, 10);
+      state.to = last; // điền cả ngày cuối để khoảng lọc hiển thị đủ hai đầu
+    }
+    $("dateFrom").value = state.from; $("dateTo").value = state.to;
+    state.page = 1;
+  }
+  $("presets").querySelectorAll("button").forEach(b =>
+    b.addEventListener("click", () => { applyPreset(b); render(); }));
+
+  function filtered() {
+    let rows = D[state.game] ? D[state.game].rows : [];
+    if (state.from) rows = rows.filter(r => r[0] >= state.from);
+    if (state.to) rows = rows.filter(r => r[0] <= state.to);
+    return rows;
+  }
+  const isTiered = g => !!D[g] && D[g].rows.length > 0 && !Array.isArray(D[g].rows[0][2]); // Max 3D: dict theo giải
+
+  // ----- ô thống kê + kỳ mới nhất -----
+  function renderTiles(rows) {
+    $("tDraws").textContent = rows.length ? fmtInt(rows.length) : "0";
+    $("tRange").textContent = rows.length ? rows[0][0] + " → " + rows[rows.length - 1][0] : "";
+    const balls = $("tLatest"); balls.innerHTML = "";
+    const last = rows[rows.length - 1];
+    if (!last) { $("tLatestSub").textContent = ""; return; }
+    $("tLatestLabel").textContent = "Kỳ mới nhất — " + last[0] + " (kỳ " + last[1] + ")";
+    if (isTiered(state.game)) {
+      (last[2]["Giải Đặc biệt"] || []).forEach((s, i, a) => {
+        balls.appendChild(ballEl(s, true));
+        if (i < a.length - 1) balls.appendChild(plusEl());
+      });
+      $("tLatestSub").textContent = "Giải Đặc biệt (các giải khác xem ở bảng dưới)";
+    } else {
+      const nums = last[2];
+      const isPower = state.game === "power655";
+      nums.forEach((n, i) => {
+        if (isPower && i === 6) balls.appendChild(plusEl());
+        balls.appendChild(ballEl(String(n).padStart(2, "0")));
+      });
+      $("tLatestSub").textContent = isPower ? "Số cuối là số đặc biệt (Jackpot 2)" : "";
+    }
+  }
+  function ballEl(text, wide) { const s = document.createElement("span"); s.className = "ball" + (wide ? " wide" : ""); s.textContent = text; return s; }
+  function plusEl() { const s = document.createElement("span"); s.className = "plus"; s.textContent = "+"; return s; }
+
+  // ----- tần suất -----
+  function frequency(rows) {
+    const counts = new Map();
+    if (isTiered(state.game)) {
+      for (const r of rows) for (const s of (r[2]["Giải Đặc biệt"] || []))
+        for (const ch of s) counts.set(+ch, (counts.get(+ch) || 0) + 1);
+      return { counts, domain: range(0, 9), unit: "chữ số" };
+    }
+    for (const r of rows) for (const n of r[2]) counts.set(n, (counts.get(n) || 0) + 1);
+    const info = D[state.game];
+    const lo = state.game === "bingo18" ? 1 : 1;
+    const hi = info.max_num || Math.max(0, ...counts.keys());
+    return { counts, domain: range(lo, hi), unit: "số" };
+  }
+  const range = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => a + i);
+
+  // ----- biểu đồ cột SVG -----
+  const tooltip = $("tooltip");
+  function renderChart(rows) {
+    const { counts, domain, unit } = frequency(rows);
+    const svg = $("chart");
+    svg.innerHTML = "";
+    const css = getComputedStyle(document.documentElement);
+    const col = v => css.getPropertyValue(v).trim();
+
+    $("chartTitle").textContent = isTiered(state.game)
+      ? "Tần suất chữ số trong Giải Đặc biệt (0–9)"
+      : "Tần suất xuất hiện của từng " + unit;
+    $("chartSub").textContent = rows.length
+      ? "Tổng hợp " + fmtInt(rows.length) + " kỳ" + (state.from || state.to ? " trong khoảng lọc" : "")
+      : "Không có dữ liệu trong khoảng lọc";
+
+    const n = domain.length;
+    const M = { t: 18, r: 8, b: 26, l: 46 };
+    const W = Math.max(640, Math.min(1060, n * 16 + M.l + M.r));
+    const H = 260;
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    svg.setAttribute("width", W); svg.setAttribute("height", H);
+    if (!rows.length) return;
+
+    const plotW = W - M.l - M.r, plotH = H - M.t - M.b;
+    const maxV = Math.max(1, ...domain.map(d => counts.get(d) || 0));
+    const step = niceStep(maxV / 4);
+    const yMax = Math.ceil(maxV / step) * step;
+    const band = plotW / n;
+    const barW = Math.min(24, Math.max(3, band - 2)); // cột ≤24px, chừa khe 2px
+    const y = v => M.t + plotH * (1 - v / yMax);
+
+    const NS = "http://www.w3.org/2000/svg";
+    const el = (tag, attrs) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
+
+    // lưới ngang + nhãn trục Y
+    for (let v = 0; v <= yMax; v += step) {
+      svg.appendChild(el("line", { x1: M.l, x2: W - M.r, y1: y(v), y2: y(v), stroke: v === 0 ? col("--baseline") : col("--grid"), "stroke-width": 1 }));
+      const t = el("text", { x: M.l - 8, y: y(v) + 4, "text-anchor": "end", "font-size": 11, fill: col("--muted") });
+      t.style.fontVariantNumeric = "tabular-nums";
+      t.textContent = fmtInt(v);
+      svg.appendChild(t);
+    }
+
+    const labelEvery = n > 40 ? 5 : (n > 15 ? 2 : 1);
+    let maxD = domain[0];
+    domain.forEach(d => { if ((counts.get(d) || 0) > (counts.get(maxD) || 0)) maxD = d; });
+
+    domain.forEach((d, i) => {
+      const v = counts.get(d) || 0;
+      const cx = M.l + band * i + band / 2;
+      const x0 = cx - barW / 2, yTop = y(v), h = y(0) - yTop;
+      if (v > 0) {
+        const r = Math.min(4, barW / 2, h); // bo 4px ở đầu cột, vuông ở chân
+        svg.appendChild(el("path", {
+          d: "M" + x0 + "," + (yTop + r) + " q0,-" + r + " " + r + ",-" + r +
+             " h" + (barW - 2 * r) + " q" + r + ",0 " + r + "," + r +
+             " v" + (h - r) + " h-" + barW + " Z",
+          fill: col("--series"), "data-bar": d
+        }));
+      }
+      // nhãn trục X (thưa dần khi nhiều cột)
+      if (d % labelEvery === 0 || n <= 12) {
+        const t = el("text", { x: cx, y: H - 8, "text-anchor": "middle", "font-size": 11, fill: col("--muted") });
+        t.style.fontVariantNumeric = "tabular-nums";
+        t.textContent = String(d).padStart(unit === "số" ? 2 : 1, "0");
+        svg.appendChild(t);
+      }
+      // nhãn trực tiếp duy nhất: cột cao nhất
+      if (d === maxD && v > 0) {
+        const t = el("text", { x: cx, y: yTop - 5, "text-anchor": "middle", "font-size": 11, "font-weight": 650, fill: col("--ink-2") });
+        t.style.fontVariantNumeric = "tabular-nums";
+        t.textContent = fmtInt(v);
+        svg.appendChild(t);
+      }
+      // vùng hover phủ cả cột (dễ trúng hơn cột mảnh)
+      const hit = el("rect", { x: M.l + band * i, y: M.t, width: band, height: plotH, fill: "transparent" });
+      hit.addEventListener("mousemove", ev => {
+        const pct = rows.length ? (v / rows.length * 100).toFixed(1) : "0";
+        tooltip.innerHTML = "<b>" + (unit === "số" ? "Số " : "Chữ số ") + String(d).padStart(unit === "số" ? 2 : 1, "0") + "</b><br>" +
+          "<span class='t2'>" + fmtInt(v) + " lần · " + pct + "% số kỳ</span>";
+        tooltip.style.display = "block";
+        tooltip.style.left = Math.min(ev.clientX + 12, innerWidth - tooltip.offsetWidth - 8) + "px";
+        tooltip.style.top = (ev.clientY - 40) + "px";
+        const bar = svg.querySelector('[data-bar="' + d + '"]');
+        if (bar) bar.setAttribute("fill", col("--series-hover"));
+      });
+      hit.addEventListener("mouseleave", () => {
+        tooltip.style.display = "none";
+        const bar = svg.querySelector('[data-bar="' + d + '"]');
+        if (bar) bar.setAttribute("fill", col("--series"));
+      });
+      svg.appendChild(hit);
+    });
+  }
+  function niceStep(raw) {
+    const p = Math.pow(10, Math.floor(Math.log10(Math.max(1, raw))));
+    for (const m of [1, 2, 5, 10]) if (m * p >= raw) return m * p;
+    return 10 * p;
+  }
+
+  // ----- bảng số nóng / lạnh -----
+  function renderHotCold(rows) {
+    const body = $("hotColdBody");
+    body.innerHTML = "";
+    if (!rows.length) return;
+    const { counts, domain, unit } = frequency(rows);
+    const pad = unit === "số" ? 2 : 1;
+    const items = domain.map(d => [d, counts.get(d) || 0]);
+    const hot = [...items].sort((a, b) => b[1] - a[1] || a[0] - b[0]);
+    const cold = [...items].sort((a, b) => a[1] - b[1] || a[0] - b[0]);
+    $("hotColdTitle").textContent =
+      (unit === "số" ? "Số" : "Chữ số Giải Đặc biệt") + " ra nhiều nhất / ít nhất";
+    const cell = ([d, v]) => {
+      const td = document.createElement("td");
+      const wrap = document.createElement("span"); wrap.className = "hc-cell";
+      wrap.appendChild(ballEl(String(d).padStart(pad, "0")));
+      wrap.querySelector(".ball").classList.add("sm");
+      const cnt = document.createElement("span"); cnt.className = "cnt";
+      cnt.textContent = v === 0 ? "chưa ra lần nào"
+        : fmtInt(v) + " lần · " + (v / rows.length * 100).toFixed(1) + "% số kỳ";
+      wrap.appendChild(cnt);
+      td.appendChild(wrap);
+      return td;
+    };
+    const nRows = Math.min(10, Math.floor(domain.length / 2));
+    for (let i = 0; i < nRows; i++) {
+      const tr = document.createElement("tr");
+      const rank = document.createElement("td"); rank.textContent = i + 1;
+      tr.append(rank, cell(hot[i]), cell(cold[i]));
+      body.appendChild(tr);
+    }
+  }
+
+  // ----- bộ số gợi ý theo luật từng trò -----
+  const RULES = {
+    power655: { k: 6, note: "chọn 6 số trong 1–55" },
+    power645: { k: 6, note: "chọn 6 số trong 1–45" },
+    keno: { k: 10, note: "bậc 10 — chọn 10 số trong 1–80" },
+    "3d": { k: 3, digits: true, note: "số 3 chữ số 000–999" },
+    "3d_pro": { k: 3, digits: true, note: "số 3 chữ số 000–999" },
+    bingo18: { k: 3, repeat: true, note: "3 mặt số 1–6, có thể lặp" },
+  };
+  function sample(pool, k, allowRepeat) {
+    if (allowRepeat) return Array.from({ length: k }, () => pool[Math.floor(Math.random() * pool.length)]);
+    const p = [...pool], out = [];
+    for (let i = 0; i < k && p.length; i++) out.push(p.splice(Math.floor(Math.random() * p.length), 1)[0]);
+    return out;
+  }
+  function makeSets(ranked, rule) {
+    const pool = ranked.slice(0, Math.min(ranked.length, Math.max(rule.k + 4, rule.k * 2)));
+    const key = s => rule.digits || rule.repeat ? s.join("") : [...s].sort((a, b) => a - b).join(",");
+    const sets = [ranked.slice(0, rule.k)]; // bộ 1: đúng thứ hạng
+    let guard = 0;
+    while (sets.length < 3 && guard++ < 200) {
+      const s = sample(pool, rule.k, rule.repeat || rule.digits);
+      if (!sets.some(e => key(e) === key(s))) sets.push(s);
+    }
+    return sets;
+  }
+  function recentNumbers(rows, nDraws) {
+    const s = new Set();
+    for (const r of rows.slice(-nDraws)) {
+      const res = r[2];
+      if (Array.isArray(res)) res.forEach(n => s.add(n));
+      else for (const t of (res["Giải Đặc biệt"] || [])) for (const ch of t) s.add(+ch);
+    }
+    return s;
+  }
+  function renderPred(rows) {
+    const card = $("predCard");
+    if (!rows.length) { card.style.display = "none"; return; }
+    card.style.display = "";
+    const rule = RULES[state.game];
+    const { counts, domain, unit } = frequency(rows);
+    const pad = unit === "số" ? 2 : 1;
+    // loại số đã về trong 2 kỳ gần nhất (tùy chọn); nới xuống 1 kỳ / bỏ loại nếu trò còn quá ít số
+    const minPool = rule.repeat || rule.digits ? 3 : rule.k;
+    let exclude = $("predExclude").checked ? recentNumbers(rows, 2) : new Set();
+    if (domain.filter(d => !exclude.has(d)).length < minPool) exclude = recentNumbers(rows, 1);
+    if (domain.filter(d => !exclude.has(d)).length < minPool) exclude = new Set();
+    const items = domain.filter(d => !exclude.has(d)).map(d => [d, counts.get(d) || 0]);
+    const hotRank = [...items].sort((a, b) => b[1] - a[1] || a[0] - b[0]).map(x => x[0]);
+    const coldRank = [...items].sort((a, b) => a[1] - b[1] || a[0] - b[0]).map(x => x[0]);
+    $("predTitle").textContent = "Bộ số gợi ý — " + D[state.game].name + " (" + rule.note + ")";
+    const fill = (elId, ranked) => {
+      const box = $(elId); box.innerHTML = "";
+      makeSets(ranked, rule).forEach((s, i) => {
+        const row = document.createElement("div"); row.className = "pred-row";
+        const tag = document.createElement("span"); tag.className = "tag"; tag.textContent = "Bộ " + (i + 1);
+        row.appendChild(tag);
+        if (rule.digits) {
+          const b = ballEl(s.join(""), true); b.classList.add("sm"); row.appendChild(b);
+        } else {
+          [...s].sort((a, b) => a - b).forEach(n => {
+            const b = ballEl(String(n).padStart(pad, "0")); b.classList.add("sm"); row.appendChild(b);
+          });
+        }
+        box.appendChild(row);
+      });
+    };
+    fill("predHot", hotRank);
+    fill("predCold", coldRank);
+  }
+  $("predBtn").addEventListener("click", () => renderPred(filtered()));
+  $("predExclude").addEventListener("change", () => { renderPred(filtered()); saveUI(); });
+
+  // ----- lâu chưa ra -----
+  function renderCold(rows) {
+    const card = $("coldCard"), box = $("cold");
+    box.innerHTML = "";
+    if (isTiered(state.game) || !rows.length) { card.style.display = "none"; return; }
+    card.style.display = "";
+    const lastSeen = new Map();
+    rows.forEach((r, i) => r[2].forEach(n => lastSeen.set(n, i)));
+    const items = [...lastSeen.entries()].sort((a, b) => a[1] - b[1]).slice(0, 10);
+    for (const [num, idx] of items) {
+      const chip = document.createElement("span");
+      chip.className = "chip";
+      chip.innerHTML = "<b>" + String(num).padStart(2, "0") + "</b> — " + fmtInt(rows.length - 1 - idx) + " kỳ trước (" + rows[idx][0] + ")";
+      box.appendChild(chip);
+    }
+  }
+
+  // ----- bảng kết quả -----
+  function renderTable(rows) {
+    const total = rows.length, pages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+    state.page = Math.min(state.page, pages);
+    const start = total - state.page * PAGE_SIZE; // mới nhất trước
+    const slice = rows.slice(Math.max(0, start), start + PAGE_SIZE).reverse();
+
+    $("tableSub").textContent = fmtInt(total) + " kỳ, mới nhất trước";
+    const tb = $("tbody"); tb.innerHTML = "";
+    for (const r of slice) {
+      const tr = document.createElement("tr");
+      const res = document.createElement("td"); res.className = "res";
+      if (isTiered(state.game)) {
+        res.innerHTML = Object.entries(r[2]).map(([tier, nums]) =>
+          "<span class='tier'>" + (TIER_SHORT[tier] || tier) + "</span>" + nums.join(" ")
+        ).join("<br>");
+      } else {
+        res.textContent = r[2].map(x => String(x).padStart(2, "0")).join(" ");
+      }
+      const td1 = document.createElement("td"); td1.textContent = r[0];
+      const td2 = document.createElement("td"); td2.textContent = r[1];
+      tr.append(td1, td2, res);
+      tb.appendChild(tr);
+    }
+    $("pageInfo").textContent = "Trang " + fmtInt(state.page) + " / " + fmtInt(pages);
+    $("pFirst").disabled = $("pPrev").disabled = state.page <= 1;
+    $("pNext").disabled = $("pLast").disabled = state.page >= pages;
+    $("pFirst").onclick = () => { state.page = 1; render(); };
+    $("pPrev").onclick = () => { state.page--; render(); };
+    $("pNext").onclick = () => { state.page++; render(); };
+    $("pLast").onclick = () => { state.page = pages; render(); };
+  }
+
+  // ----- lưu / khôi phục lựa chọn (localStorage; URL param được ưu tiên hơn) -----
+  const STORE_KEY = "vietlott-ui";
+  function saveUI() {
+    try {
+      const preset = document.querySelector("#presets button.active");
+      localStorage.setItem(STORE_KEY, JSON.stringify({
+        game: state.game, from: state.from, to: state.to,
+        days: preset ? +preset.dataset.days : null,
+        exclude: $("predExclude").checked,
+        theme: document.documentElement.dataset.theme || "",
+      }));
+    } catch (e) { /* localStorage bị chặn thì bỏ qua, trang vẫn chạy bình thường */ }
+  }
+  const saved = (() => {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { return {}; }
+  })();
+  if (!params.get("theme") && (saved.theme === "light" || saved.theme === "dark"))
+    document.documentElement.dataset.theme = saved.theme;
+  if (!params.get("g") && GAMES.includes(saved.game)) state.game = saved.game;
+  if (typeof saved.exclude === "boolean") $("predExclude").checked = saved.exclude;
+
+  async function start() {
+    await loadGame(state.game); // cần dữ liệu trước khi tính khoảng lọc nhanh
+    // ?days=30|90|365|0 — áp bộ lọc nhanh ngay khi mở trang
+    if (params.get("days") !== null) {
+      const pb = document.querySelector('#presets button[data-days="' + params.get("days") + '"]');
+      if (pb) applyPreset(pb);
+    } else if (saved.days != null) {
+      const pb = document.querySelector('#presets button[data-days="' + saved.days + '"]');
+      if (pb) applyPreset(pb); // tính lại theo kỳ mới nhất thay vì dùng ngày cũ
+    } else if (saved.from || saved.to) {
+      clearPreset();
+      state.from = saved.from || ""; state.to = saved.to || "";
+      $("dateFrom").value = state.from; $("dateTo").value = state.to;
+    }
+    render();
+  }
+
+  function render() {
+    tabs.querySelectorAll("button").forEach(b => b.classList.toggle("active", b.dataset.game === state.game));
+    if (!D[state.game]) return; // tải thất bại: giữ nguyên trang, thông báo đã hiện ở góc trên
+    const rows = filtered();
+    renderTiles(rows);
+    renderChart(rows);
+    renderHotCold(rows);
+    renderPred(rows);
+    renderCold(rows);
+    renderTable(rows);
+    saveUI();
+  }
+  start();
+})();
+</script>
+</body>
+</html>
