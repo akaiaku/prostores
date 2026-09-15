@@ -7,23 +7,23 @@
     <title>Terms of Service — ProStores Games</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --accent-orange: #fb923c;
-            --text-primary: rgba(255,255,255,0.95);
-            --text-secondary: rgba(255,255,255,0.6);
-            --text-muted: rgba(255,255,255,0.4);
-            --glass-border: rgba(255,255,255,0.1);
+            --accent-orange: #ea580c;
+            --text-primary: #181b2e;
+            --text-secondary: #5b6178;
+            --text-muted: rgba(24,27,46,0.45);
+            --glass-border: rgba(24,27,46,0.08);
         }
 
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #0a0a0f;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f6f7fb;
             color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
@@ -36,16 +36,16 @@
         }
         .aurora-blob {
             position: absolute; border-radius: 50%;
-            filter: blur(100px); opacity: 0.2;
+            filter: blur(100px); opacity: 0.35;
         }
         .aurora-blob:nth-child(1) {
             width: 500px; height: 500px;
-            background: radial-gradient(circle, #c2410c, transparent 70%);
+            background: radial-gradient(circle, #fdba74, transparent 70%);
             top: -150px; left: -100px;
         }
         .aurora-blob:nth-child(2) {
             width: 400px; height: 400px;
-            background: radial-gradient(circle, #7c3aed, transparent 70%);
+            background: radial-gradient(circle, #c4b5fd, transparent 70%);
             bottom: 0; right: -100px;
         }
 
@@ -53,26 +53,26 @@
             position: sticky; top: 0; z-index: 100;
             display: flex; align-items: center; justify-content: space-between;
             padding: 16px 32px;
-            background: rgba(10,10,15,0.75);
+            background: rgba(255,255,255,0.75);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--glass-border);
         }
         .navbar-brand {
             font-size: 1.2rem; font-weight: 800;
-            background: linear-gradient(135deg, #a78bfa, #60a5fa);
+            background: linear-gradient(135deg, #7c3aed, #2563eb);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             background-clip: text; text-decoration: none; letter-spacing: -0.5px;
         }
         .navbar-back {
             font-size: 0.75rem; font-weight: 600;
             padding: 6px 14px; border-radius: 20px;
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(24,27,46,0.05);
+            border: 1px solid rgba(24,27,46,0.1);
             color: var(--text-secondary); text-decoration: none;
             transition: all 0.2s;
         }
-        .navbar-back:hover { background: rgba(255,255,255,0.13); color: var(--text-primary); }
+        .navbar-back:hover { background: rgba(24,27,46,0.09); color: var(--text-primary); }
 
         .container {
             position: relative; z-index: 2;
@@ -92,17 +92,18 @@
         .page-title {
             font-size: clamp(2rem, 5vw, 3rem);
             font-weight: 900; letter-spacing: -1.5px;
-            background: linear-gradient(135deg, #fb923c, #fbbf24);
+            background: linear-gradient(135deg, #c2410c, #b45309);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             background-clip: text; margin-bottom: 12px;
         }
         .page-meta { font-size: 0.85rem; color: var(--text-muted); }
 
         .article {
-            background: rgba(255,255,255,0.04);
+            background: rgba(255,255,255,0.7);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
             padding: 40px 44px;
+            box-shadow: 0 4px 20px rgba(24,27,46,0.05);
         }
 
         .section { margin-bottom: 40px; }
@@ -111,8 +112,8 @@
         .section-num {
             display: inline-flex; align-items: center; justify-content: center;
             width: 28px; height: 28px; border-radius: 8px;
-            background: linear-gradient(135deg, #fb923c, #f59e0b);
-            font-size: 0.75rem; font-weight: 800; color: #0a0a0f;
+            background: linear-gradient(135deg, #f97316, #f59e0b);
+            font-size: 0.75rem; font-weight: 800; color: #1a1c29;
             margin-right: 10px; flex-shrink: 0;
         }
 
@@ -142,31 +143,31 @@
 
         .divider {
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            background: linear-gradient(90deg, transparent, rgba(24,27,46,0.08), transparent);
             margin: 32px 0;
         }
 
         .highlight-box {
-            background: rgba(251,146,60,0.08);
-            border: 1px solid rgba(251,146,60,0.2);
+            background: rgba(234,88,12,0.08);
+            border: 1px solid rgba(234,88,12,0.2);
             border-radius: 12px; padding: 16px 20px; margin: 14px 0;
         }
-        .highlight-box p { color: rgba(253,186,116,0.9); margin: 0; }
+        .highlight-box p { color: #9a3412; margin: 0; }
 
         .contact-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(24,27,46,0.04);
+            border: 1px solid rgba(24,27,46,0.1);
             border-radius: 14px; padding: 20px 24px;
             display: flex; align-items: center; gap: 16px; margin-top: 14px;
         }
         .contact-icon {
             width: 44px; height: 44px; border-radius: 12px;
-            background: linear-gradient(135deg, #fb923c, #f59e0b);
+            background: linear-gradient(135deg, #f97316, #f59e0b);
             display: flex; align-items: center; justify-content: center;
             font-size: 1.2rem; flex-shrink: 0;
         }
         .contact-info p { color: var(--text-secondary); font-size: 0.85rem; margin: 0; }
-        .contact-info a { color: #fbbf24; text-decoration: none; }
+        .contact-info a { color: #c2410c; text-decoration: none; }
         .contact-info a:hover { text-decoration: underline; }
 
         .footer {
