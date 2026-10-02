@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Upload Control</title>
+<meta name="description" content="Upload Control is a personal tool for planning and publishing your own videos to TikTok, YouTube and other platforms from one place.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%23fe2c55'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1024' height='1024' rx='200' fill='url(%23g)'/%3E%3Crect x='232' y='292' width='560' height='440' rx='72' fill='none' stroke='%23fff' stroke-width='56'/%3E%3Cpath d='M512 640V420' stroke='%23fff' stroke-width='64' stroke-linecap='round'/%3E%3Cpath d='M404 512L512 404L620 512' fill='none' stroke='%23fff' stroke-width='64' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Figtree:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+  /* Same look as privacy.html / terms.html: one readable column, blue→pink brand band from the app icon. */
+  :root {
+    --bg: #f6f7fb;
+    --surface: #ffffff;
+    --fg: #1b1f2a;
+    --muted: #5b6275;
+    --line: #e1e4ee;
+    --accent: #3b4fd8;
+    --brand-a: #2563eb;
+    --brand-b: #fe2c55;
+    --font-display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+    --font-body: "Figtree", "Helvetica Neue", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12141b; --surface: #1a1d27; --fg: #e8eaf2; --muted: #a0a7ba; --line: #2c3141; --accent: #8fa0ff;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #12141b; --surface: #1a1d27; --fg: #e8eaf2; --muted: #a0a7ba; --line: #2c3141; --accent: #8fa0ff;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.65 var(--font-body); }
+  .band { height: 6px; background: linear-gradient(90deg, var(--brand-a), var(--brand-b)); }
+  .wrap { max-width: 880px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 64px; }
+  a { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 10px; font: 700 18px/1 var(--font-display); color: var(--fg); text-decoration: none; }
+  .brand svg { width: 32px; height: 32px; border-radius: 8px; flex: none; }
+  .top nav { display: flex; gap: 18px; font-size: 15px; }
+  .top nav a { color: var(--muted); text-decoration: none; }
+  .top nav a:hover { color: var(--accent); text-decoration: underline; }
+
+  .hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 32px; align-items: center; padding-block: 56px 40px; }
+  .hero svg { width: 168px; height: 168px; border-radius: 38px; box-shadow: 0 18px 40px -18px rgba(37, 99, 235, .55); }
+  .eyebrow { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+  h1 { font: 700 clamp(32px, 6vw, 48px)/1.1 var(--font-display); margin: 0 0 16px; text-wrap: balance; }
+  .lead { font-size: 19px; color: var(--muted); margin: 0; max-width: 56ch; }
+  @media (max-width: 640px) {
+    .hero { grid-template-columns: 1fr; padding-block: 36px 28px; }
+    .hero svg { width: 96px; height: 96px; border-radius: 22px; order: -1; }
+  }
+
+  h2 { font: 600 24px/1.3 var(--font-display); margin: 48px 0 16px; text-wrap: balance; }
+  p, li { max-width: 68ch; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; }
+  .card h3 { font: 600 17px/1.3 var(--font-display); margin: 0 0 6px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+
+  ol.steps { list-style: none; counter-reset: s; padding: 0; margin: 0; display: grid; gap: 12px; }
+  ol.steps li { counter-increment: s; display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 14px; align-items: start;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; max-width: none; }
+  ol.steps li::before { content: counter(s); display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--brand-a), var(--brand-b)); color: #fff; font-weight: 600; font-variant-numeric: tabular-nums; }
+  ol.steps strong { display: block; }
+  ol.steps span { color: var(--muted); font-size: 15px; }
+
+  .note { margin-top: 18px; padding: 14px 18px; border-left: 4px solid var(--accent); background: var(--surface); border-radius: 0 10px 10px 0; font-size: 15px; }
+
+  .vi { margin-top: 48px; padding: 18px 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+  .vi h2 { margin-top: 0; font-size: 19px; }
+  .vi ul { margin-bottom: 0; padding-left: 22px; }
+
+  footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted);
+    display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; }
+  footer nav { display: flex; gap: 18px; }
+</style>
+</head>
+<body>
+<div class="band"></div>
+<div class="wrap">
+  <div class="top">
+    <a class="brand" href="./">
+      <svg viewBox="0 0 1024 1024" aria-hidden="true">
+        <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#fe2c55"/></linearGradient></defs>
+        <rect width="1024" height="1024" fill="url(#g1)"/>
+        <rect x="232" y="292" width="560" height="440" rx="72" fill="none" stroke="#fff" stroke-width="56"/>
+        <path d="M512 640V420" stroke="#fff" stroke-width="64" stroke-linecap="round"/>
+        <path d="M404 512L512 404L620 512" fill="none" stroke="#fff" stroke-width="64" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Upload Control
+    </a>
+    <nav aria-label="Legal">
+      <a href="privacy_policy.html">Privacy Policy</a>
+      <a href="terms_of_service.html">Terms of Service</a>
+    </nav>
+  </div>
+
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Personal video publishing tool</p>
+      <h1>Plan once, post your videos everywhere.</h1>
+      <p class="lead">Upload Control keeps each of your videos, with its title, caption, hashtags, thumbnail and schedule, in one place,
+        and posts it to your own TikTok and YouTube accounts when you click post.</p>
+    </div>
+    <svg viewBox="0 0 1024 1024" aria-hidden="true">
+      <defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#fe2c55"/></linearGradient></defs>
+      <rect width="1024" height="1024" fill="url(#g2)"/>
+      <rect x="232" y="292" width="560" height="440" rx="72" fill="none" stroke="#fff" stroke-width="56"/>
+      <path d="M512 640V420" stroke="#fff" stroke-width="64" stroke-linecap="round"/>
+      <path d="M404 512L512 404L620 512" fill="none" stroke="#fff" stroke-width="64" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="440" cy="824" r="22" fill="#fff" opacity=".95"/>
+      <circle cx="512" cy="824" r="22" fill="#fff" opacity=".75"/>
+      <circle cx="584" cy="824" r="22" fill="#fff" opacity=".55"/>
+    </svg>
+  </header>
+
+  <section aria-labelledby="features">
+    <h2 id="features">What it does</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>One video, every platform</h3>
+        <p>Write the title, description and tags once. Override them per platform when TikTok or YouTube needs something different.</p>
+      </div>
+      <div class="card">
+        <h3>Post to TikTok</h3>
+        <p>Connect your TikTok account with Login Kit and publish with the Content Posting API, using the privacy, comment, Duet and Stitch settings you choose.</p>
+      </div>
+      <div class="card">
+        <h3>Upload to YouTube</h3>
+        <p>Upload with a custom thumbnail, add to a playlist and schedule the public release time.</p>
+      </div>
+      <div class="card">
+        <h3>Track status</h3>
+        <p>See every video as Draft, Ready, Scheduled, Published or Failed on each platform, with a link to the live post.</p>
+      </div>
+      <div class="card">
+        <h3>Multiple accounts</h3>
+        <p>Connect more than one channel or account and pick which one each video goes to.</p>
+      </div>
+      <div class="card">
+        <h3>Private by design</h3>
+        <p>Runs on your own computer. Videos, captions and tokens are stored locally, with no analytics or tracking.</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="tiktok">
+    <h2 id="tiktok">How posting to TikTok works</h2>
+    <ol class="steps">
+      <li><div><strong>Connect your account</strong><span>Sign in with TikTok and approve access. The app reads your basic profile (display name, avatar) to show which account you are posting to.</span></div></li>
+      <li><div><strong>Prepare the video</strong><span>Add the video file, caption and hashtags. The app checks caption length against TikTok's limits.</span></div></li>
+      <li><div><strong>Choose posting settings</strong><span>Pick who can view the video and whether comments, Duet and Stitch are allowed. Only the options your account allows are shown.</span></div></li>
+      <li><div><strong>Confirm and post</strong><span>Nothing is posted until you review the preview and click post. You can then follow the upload status and open the published video.</span></div></li>
+    </ol>
+    <p class="note">You can disconnect your TikTok account in the app at any time, which deletes its stored tokens, or revoke access from your TikTok settings.</p>
+  </section>
+
+  <aside class="vi" lang="vi">
+    <h2>Giới thiệu tiếng Việt</h2>
+    <ul>
+      <li>Upload Control là công cụ cá nhân để soạn và đăng video của chính mình lên TikTok, YouTube và các nền tảng khác.</li>
+      <li>Mỗi video có tiêu đề, mô tả, hashtag, thumbnail, lịch đăng; có thể chỉnh riêng cho từng nền tảng.</li>
+      <li>Đăng TikTok qua Login Kit và Content Posting API; video chỉ được đăng khi bạn bấm đăng và xác nhận.</li>
+      <li>Chạy trên máy của bạn, dữ liệu lưu cục bộ, không quảng cáo, không theo dõi.</li>
+    </ul>
+  </aside>
+
+  <footer>
+    <span>© 2026 Upload Control</span>
+    <nav aria-label="Legal">
+      <a href="privacy_policy.html">Privacy Policy</a>
+      <a href="terms_of_service.html">Terms of Service</a>
+    </nav>
+  </footer>
+</div>
+</body>
+</html>
